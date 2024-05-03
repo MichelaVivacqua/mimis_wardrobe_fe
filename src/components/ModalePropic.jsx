@@ -26,7 +26,7 @@ const ModalePropic = ({ show, handleClose }) => {
 
     // Crea l'oggetto FormData e aggiungi l'immagine
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("propic", image);
 
     try {
       const response = await fetch("http://localhost:3001/utenti/upload", {

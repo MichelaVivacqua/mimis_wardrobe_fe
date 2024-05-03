@@ -33,8 +33,9 @@ const Login = () => {
 
       if (response.ok) {
         // Se la richiesta ha avuto successo, ottieni il token dalla risposta
+
         const data = await response.json();
-        const token = data.token;
+        const token = data.accessToken;
 
         // Memorizza il token nel localStorage
         localStorage.setItem("token", token);
