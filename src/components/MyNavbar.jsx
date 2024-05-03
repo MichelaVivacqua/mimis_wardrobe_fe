@@ -16,7 +16,7 @@ const MyNavbar = () => (
       <Navbar.Toggle aria-controls="navbarSupportedContent" />
       <Navbar.Collapse id="navbarSupportedContent">
         <Nav className="me-auto mb-2 mb-lg-0">
-          <NavDropdown title="Armadio" id="basic-nav-dropdown">
+          <NavDropdown title="Indumenti" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">
               Aggiungi indumento
             </NavDropdown.Item>
@@ -24,7 +24,7 @@ const MyNavbar = () => (
               Elimina indumento
             </NavDropdown.Item>
           </NavDropdown>
-          <NavDropdown title="APRI Armadio" id="basic-nav-dropdown">
+          <NavDropdown title="Armadio" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.3">
               Visualizza tutto
             </NavDropdown.Item>

@@ -3,9 +3,12 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // Aggiungi stato per l'errore
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -39,8 +42,9 @@ const Login = () => {
         // Reindirizza l'utente a una nuova pagina
         navigate("/MyNavbar");
       } else {
-        // Altrimenti, gestisci l'errore
-        console.error("Errore durante il login:", response.statusText);
+        // Se la risposta non è ok, gestisci l'errore
+        const errorData = await response.json();
+        setError(errorData.message);
       }
     } catch (error) {
       console.error("Errore durante il login:", error);
@@ -49,6 +53,7 @@ const Login = () => {
 
   return (
     <Form onSubmit={handleFormSubmit}>
+      <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       <Form.Group className="mt-5 mb-3" controlId="formBasicEmail">
         <Form.Label>Email</Form.Label>
         <Form.Control
@@ -58,7 +63,6 @@ const Login = () => {
           onChange={handleEmailChange}
         />
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
@@ -68,6 +72,8 @@ const Login = () => {
           onChange={handlePasswordChange}
         />
       </Form.Group>
+      {error && <p className="text-danger">{error}</p>}{" "}
+      {/* Visualizza l'errore se presente */}
       <Button type="submit" className="custom-button">
         Accedi
       </Button>
