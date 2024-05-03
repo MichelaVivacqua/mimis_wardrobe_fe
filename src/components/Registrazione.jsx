@@ -1,37 +1,120 @@
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const Registrazione = () => (
-  <Form>
-    <div className="m-2">Inserisci qui i tuoi dati per registrarti!</div>
-    <Form.Group className="m-2">
-      <Form.Control type="text" placeholder="Username" />
-    </Form.Group>
+const Registrazione = () => {
+  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [immagineProfilo, setImmagineProfilo] = useState("");
+  const [ruolo, setRuolo] = useState("");
+  const [error, setError] = useState("");
 
-    <Form.Group className="m-2">
-      <Form.Control type="text" placeholder="Nome" />
-    </Form.Group>
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
 
-    <Form.Group className="m-2">
-      <Form.Control type="text" placeholder="Cognome" />
-    </Form.Group>
+    try {
+      const response = await fetch("http://localhost:3001/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          name,
+          surname,
+          email,
+          password,
+          propic: immagineProfilo,
+          ruolo: ruolo.toUpperCase() === "ADMIN" ? "ADMIN" : "USER",
+        }),
+      });
 
-    <Form.Group className="m-2" controlId="formBasicEmail">
-      <Form.Control type="email" placeholder="Email" />
-    </Form.Group>
+      if (response.ok) {
+        window.location.href = "/";
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+      }
+    } catch (error) {
+      console.error("Errore durante la registrazione:", error);
+    }
+  };
 
-    <Form.Group className="m-2" controlId="formBasicPassword">
-      <Form.Control type="password" placeholder="Password" />
-    </Form.Group>
+  return (
+    <Form onSubmit={handleFormSubmit}>
+      {error && <p className="text-danger">{error}</p>}
+      <div className="m-2">Inserisci qui i tuoi dati per registrarti!</div>
+      <Form.Group className="m-2">
+        <Form.Control
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </Form.Group>
 
-    <Form.Group className="m-2">
-      <Form.Control type="text" placeholder="Immagine del profilo" />
-    </Form.Group>
+      <Form.Group className="m-2">
+        <Form.Control
+          type="text"
+          placeholder="Nome"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </Form.Group>
 
-    <Button type="submit" className="custom-button">
-      Crea il mio account
-    </Button>
-  </Form>
-);
+      <Form.Group className="m-2">
+        <Form.Control
+          type="text"
+          placeholder="Cognome"
+          value={surname}
+          onChange={(e) => setSurname(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="m-2" controlId="formBasicEmail">
+        <Form.Control
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="m-2">
+        <Form.Control
+          type="text"
+          placeholder="Immagine del profilo"
+          value={immagineProfilo}
+          onChange={(e) => setImmagineProfilo(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="m-2" controlId="formBasicPassword">
+        <Form.Control
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="m-2">
+        <Form.Control
+          type="text"
+          placeholder="RUOLO (USER o ADMIN)"
+          value={ruolo}
+          onChange={(e) => setRuolo(e.target.value)}
+        />
+      </Form.Group>
+
+      <Button type="submit" className="custom-button">
+        Crea il mio account
+      </Button>
+    </Form>
+  );
+};
 
 export default Registrazione;
