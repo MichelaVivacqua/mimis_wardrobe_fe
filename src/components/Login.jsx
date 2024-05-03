@@ -38,6 +38,7 @@ const Login = () => {
 
         // Memorizza il token nel localStorage
         localStorage.setItem("token", token);
+        console.log("token dell'utente loggato:" + token);
 
         // Reindirizza l'utente a una nuova pagina
         navigate("/MyNavbar");
