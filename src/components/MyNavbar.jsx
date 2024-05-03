@@ -5,8 +5,11 @@ import logo from "../assets/OIG4 (6).jpg";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 const MyNavbar = () => (
-  <Navbar style={{ backgroundColor: "#E24B3D" }}>
-    <Container fluid>
+  <Container fluid>
+    <Navbar
+      style={{ backgroundColor: "#E24B3D" }}
+      className="justify-content-between"
+    >
       <Navbar.Brand href="#">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Navbar.Brand>
@@ -45,8 +48,8 @@ const MyNavbar = () => (
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
-    </Container>
-  </Navbar>
+    </Navbar>
+  </Container>
 );
 
 export default MyNavbar;

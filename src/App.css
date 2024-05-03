@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+.custom-button {
+  background-color: #e24b3d !important;
+  border-color: #e24b3d !important;
+  color: white !important;
+}
+
+.linknondecorato {
+  font-weight: normal !important;
+  color: #e24b3d !important;
+}
