@@ -37,7 +37,7 @@ const Login = () => {
         localStorage.setItem("token", token);
 
         // Reindirizza l'utente a una nuova pagina
-        navigate("/dashboard");
+        navigate("/MyNavbar");
       } else {
         // Altrimenti, gestisci l'errore
         console.error("Errore durante il login:", response.statusText);

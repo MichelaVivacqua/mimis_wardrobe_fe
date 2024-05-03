@@ -10,13 +10,11 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <header className="container-fluid">
-          <MyNavbar />
-        </header>
         <main className="container-fluid">
           <Routes>
             <Route element={<Login />} path="/" />
             <Route element={<Registrazione />} path="/Registrazione" />
+            <Route element={<MyNavbar />} path="/MyNavbar" />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
