@@ -4,19 +4,48 @@ import Navbar from "react-bootstrap/Navbar";
 import logo from "../assets/OIG4 (6).jpg";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import ModalePropic from "./ModalePropic";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const MyNavbar = () => {
+  const [userData, setUserData] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const handleModalOpen = () => setShowModal(true);
   const handleModalClose = () => setShowModal(false);
 
+  useEffect(() => {
+    // Funzione per ottenere i dati dell'utente
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/utenti/me", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        if (response.ok) {
+          const userData = await response.json();
+          setUserData(userData);
+        } else {
+          console.error("Errore nel caricamento dei dati dell'utente");
+        }
+      } catch (error) {
+        console.error("Errore nel caricamento dei dati dell'utente:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
-    <Container fluid>
-      <Navbar
-        style={{ backgroundColor: "#E24B3D" }}
-        className="justify-content-between"
-      >
+    <Container fluid style={{ backgroundColor: "#E24B3D" }}>
+      <div className="d-flex justify-content-end align-items-center py-3">
+        <img
+          src={userData && userData.propic}
+          alt="Foto del profilo"
+          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+        />
+        <div>Ciao {userData ? userData.name : "Utente"}</div>
+      </div>
+      <Navbar className="justify-content-between">
         <Navbar.Brand href="#">
           <img
             src={logo}
