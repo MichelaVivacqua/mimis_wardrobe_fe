@@ -83,21 +83,25 @@ const Registrazione = () => {
         />
       </Form.Group>
 
-      <Form.Group className="m-2">
-        <Form.Control
-          type="text"
-          placeholder="Immagine del profilo"
-          value={immagineProfilo}
-          onChange={(e) => setImmagineProfilo(e.target.value)}
-        />
-      </Form.Group>
-
       <Form.Group className="m-2" controlId="formBasicPassword">
         <Form.Control
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group className="m-5">
+        <Form.Label>
+          Immagine del profilo (puoi incollare un URL o caricarla dopo dal tuo
+          dispositivo)
+        </Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="URL immagine del profilo qui"
+          value={immagineProfilo}
+          onChange={(e) => setImmagineProfilo(e.target.value)}
         />
       </Form.Group>
 

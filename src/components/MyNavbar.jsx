@@ -44,6 +44,9 @@ const MyNavbar = () => {
           style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
         <div>Ciao {userData ? userData.name : "Utente"}</div>
+        <Nav.Link onClick={handleModalOpen}>
+          <i className="bi bi-person-bounding-box m-2"></i>
+        </Nav.Link>
       </div>
       <Navbar className="justify-content-between">
         <Navbar.Brand href="#">
@@ -86,9 +89,6 @@ const MyNavbar = () => {
                 Elimina abbinamento
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link onClick={handleModalOpen}>
-              <i className="bi bi-person-bounding-box"></i>
-            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
