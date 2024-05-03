@@ -8,7 +8,7 @@ import logo from "../assets/OIG4 (6).jpg";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Aggiungi stato per l'errore
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
@@ -32,19 +32,14 @@ const Login = () => {
       });
 
       if (response.ok) {
-        // Se la richiesta ha avuto successo, ottieni il token dalla risposta
-
         const data = await response.json();
         const token = data.accessToken;
 
-        // Memorizza il token nel localStorage
         localStorage.setItem("token", token);
-        console.log("token dell'utente loggato:" + token);
+        // console.log("token dell'utente loggato:" + token);
 
-        // Reindirizza l'utente a una nuova pagina
         navigate("/MyNavbar");
       } else {
-        // Se la risposta non è ok, gestisci l'errore
         const errorData = await response.json();
         setError(errorData.message);
       }
@@ -75,7 +70,6 @@ const Login = () => {
         />
       </Form.Group>
       {error && <p className="text-danger">{error}</p>}{" "}
-      {/* Visualizza l'errore se presente */}
       <Button type="submit" className="custom-button">
         Accedi
       </Button>

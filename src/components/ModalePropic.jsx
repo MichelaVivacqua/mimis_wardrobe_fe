@@ -4,27 +4,22 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 
 const ModalePropic = ({ show, handleClose }) => {
-  const [image, setImage] = useState(""); // Stato per memorizzare l'immagine
+  const [image, setImage] = useState("");
 
   const handleImageChange = (e) => {
-    // Gestione del cambiamento dell'immagine
     const file = e.target.files[0];
-    // Esegui eventuali controlli sull'immagine qui...
     setImage(file);
   };
 
   const handleImageUpload = async () => {
-    // Ottieni il token memorizzato nel localStorage
     const token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
 
-    // Verifica che il token sia valido
     if (!token) {
       console.error("Token non trovato");
       return;
     }
 
-    // Crea l'oggetto FormData e aggiungi l'immagine
     const formData = new FormData();
     formData.append("propic", image);
 
@@ -32,16 +27,14 @@ const ModalePropic = ({ show, handleClose }) => {
       const response = await fetch("http://localhost:3001/utenti/upload", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${token}`, // Aggiungi il token all'header Authorization
+          Authorization: `Bearer ${token}`,
         },
         body: formData,
       });
 
       if (response.ok) {
-        // Immagine caricata con successo
-        handleClose(); // Chiudi il modale
+        handleClose();
       } else {
-        // Gestisci errori di caricamento
         console.error(
           "Errore durante il caricamento dell'immagine:",
           response.statusText
