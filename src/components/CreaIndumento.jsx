@@ -35,8 +35,8 @@ const CreaIndumento = () => {
         },
         body: JSON.stringify({
           image,
-          colore,
-          tipo,
+          colore: colore.toUpperCase(),
+          tipo: tipo.toUpperCase(),
         }),
       });
 
