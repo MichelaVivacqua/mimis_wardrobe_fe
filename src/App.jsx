@@ -5,6 +5,7 @@ import MyNavbar from "./components/MyNavbar";
 import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registrazione from "./components/Registrazione";
+import CreaIndumento from "./components/CreaIndumento";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route element={<Login />} path="/" />
             <Route element={<Registrazione />} path="/Registrazione" />
             <Route element={<MyNavbar />} path="/MyNavbar" />
+            <Route element={<CreaIndumento />} path="/MyNavbar/CreaIndumento" />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>

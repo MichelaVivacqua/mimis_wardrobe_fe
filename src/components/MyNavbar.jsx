@@ -5,6 +5,7 @@ import logo from "../assets/OIG4 (6).jpg";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import ModalePropic from "./ModalePropic";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const MyNavbar = () => {
   const [userData, setUserData] = useState(null);
@@ -60,8 +61,10 @@ const MyNavbar = () => {
         <Navbar.Collapse id="navbarSupportedContent">
           <Nav className="me-auto mb-2 mb-lg-0">
             <NavDropdown title="Indumenti" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">
-                Aggiungi indumento
+              <NavDropdown.Item>
+                <Link to="./CreaIndumento" className="linknondecorato">
+                  Aggiungi indumento
+                </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Elimina indumento
