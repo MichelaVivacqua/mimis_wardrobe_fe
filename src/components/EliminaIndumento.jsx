@@ -27,6 +27,30 @@ const EliminaIndumento = () => {
     fetchMyClothes();
   }, []);
 
+  const handleDelete = async (indumentoId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:3001/indumenti/${indumentoId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Errore durante l'eliminazione dell'indumento.");
+      }
+      // Rimuovo l'indumento dall'array myClothes
+      setMyClothes((prevClothes) =>
+        prevClothes.filter((clothing) => clothing.id !== indumentoId)
+      );
+    } catch (error) {
+      console.error("Errore durante l'eliminazione:", error);
+    }
+  };
+
   return (
     <div className="my-clothes-container">
       {myClothes.map((clothing) => (
@@ -35,7 +59,9 @@ const EliminaIndumento = () => {
           <Card.Body>
             <Card.Title>{clothing.tipo}</Card.Title>
             <Card.Text>{clothing.colore}</Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button variant="danger" onClick={() => handleDelete(clothing.id)}>
+              Elimina
+            </Button>
           </Card.Body>
         </Card>
       ))}
