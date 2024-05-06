@@ -9,6 +9,7 @@ import CreaIndumento from "./components/CreaIndumento";
 import EliminaIndumento from "./components/EliminaIndumento";
 import Armadio from "./components/Armadio";
 import FiltroColore from "./components/FiltroColore";
+import FiltroTipologia from "./components/FiltroTipologia";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
             />
             <Route element={<Armadio />} path="/MyNavbar/Armadio" />
             <Route element={<FiltroColore />} path="/MyNavbar/FiltroColore" />
+            <Route
+              element={<FiltroTipologia />}
+              path="/MyNavbar/FiltroTipologia"
+            />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>

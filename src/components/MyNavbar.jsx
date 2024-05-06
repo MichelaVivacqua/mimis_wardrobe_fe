@@ -83,8 +83,10 @@ const MyNavbar = () => {
                   Filtra per colore
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">
-                Filtra per tipologia
+              <NavDropdown.Item>
+                <Link to="./FiltroTipologia" className="linknondecorato">
+                  Filtra per tipo
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Abbinamenti" id="basic-nav-dropdown">
