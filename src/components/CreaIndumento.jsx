@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
 const CreaIndumento = () => {
-  const [image, setImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [colore, setColore] = useState("");
   const [tipo, setTipo] = useState("");
   const [error, setError] = useState("");
@@ -12,18 +12,27 @@ const CreaIndumento = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      await recuperotoken();
+      const imageUrl = await uploadImage();
+      if (imageUrl) {
+        const indumentoId = await recuperotoken(imageUrl);
+        if (indumentoId) {
+          setSuccessMessage("Indumento creato con successo");
+          setImageFile(null);
+          setColore("");
+          setTipo("");
+        }
+      }
     } catch (error) {
       console.error("Errore durante il salvataggio dell'indumento:", error);
     }
   };
 
-  const recuperotoken = async () => {
+  const recuperotoken = async (imageUrl) => {
     const token = localStorage.getItem("token");
 
     if (!token) {
       console.error("Token non trovato");
-      return;
+      return null;
     }
 
     try {
@@ -34,37 +43,64 @@ const CreaIndumento = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          image,
+          imageUrl,
           colore: colore.toUpperCase(),
           tipo: tipo.toUpperCase(),
         }),
       });
 
       if (response.ok) {
-        setSuccessMessage("INDUMENTO CREATO CON SUCCESSO");
-        setImage("");
-        setColore("");
-        setTipo("");
+        const data = await response.json();
+        return data.indumentoId;
       } else {
         const errorData = await response.json();
         setError(errorData.message);
+        return null;
       }
     } catch (error) {
       console.error("Errore durante il salvataggio dell'indumento:", error);
+      return null;
+    }
+  };
+
+  const uploadImage = async () => {
+    const formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("upload_preset", "your_cloudinary_upload_preset");
+
+    try {
+      const response = await fetch(
+        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.secure_url;
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+        return null;
+      }
+    } catch (error) {
+      console.error("Errore durante il caricamento dell'immagine:", error);
+      return null;
     }
   };
 
   return (
     <div>
+      {error && <p className="text-danger">{error}</p>}
+      {successMessage && <p className="text-success">{successMessage}</p>}
       <Form onSubmit={handleFormSubmit}>
-        {error && <p className="text-danger">{error}</p>}
         <div className="m-5">Crea il tuo indumento!</div>
         <Form.Group className="m-3">
           <Form.Control
-            type="text"
-            placeholder="URL foto indumento"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            type="file"
+            onChange={(e) => setImageFile(e.target.files[0])}
           />
         </Form.Group>
 
@@ -90,7 +126,6 @@ const CreaIndumento = () => {
           SALVA
         </Button>
       </Form>
-      {successMessage && <p className="text-success m-3">{successMessage}</p>}
     </div>
   );
 };
