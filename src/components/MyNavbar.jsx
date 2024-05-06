@@ -66,13 +66,17 @@ const MyNavbar = () => {
                   Aggiungi indumento
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Elimina indumento
+              <NavDropdown.Item>
+                <Link to="./EliminaIndumento" className="linknondecorato">
+                  Elimina indumento
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
             <NavDropdown title="Armadio" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.3">
-                Visualizza tutto
+              <NavDropdown.Item>
+                <Link to="./Armadio" className="linknondecorato">
+                  Visualizza tutto
+                </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.4">
                 Filtra per colore

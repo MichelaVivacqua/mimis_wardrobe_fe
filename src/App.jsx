@@ -6,6 +6,8 @@ import Login from "./components/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Registrazione from "./components/Registrazione";
 import CreaIndumento from "./components/CreaIndumento";
+import EliminaIndumento from "./components/EliminaIndumento";
+import Armadio from "./components/Armadio";
 
 function App() {
   return (
@@ -17,6 +19,11 @@ function App() {
             <Route element={<Registrazione />} path="/Registrazione" />
             <Route element={<MyNavbar />} path="/MyNavbar" />
             <Route element={<CreaIndumento />} path="/MyNavbar/CreaIndumento" />
+            <Route
+              element={<EliminaIndumento />}
+              path="/MyNavbar/EliminaIndumento"
+            />
+            <Route element={<Armadio />} path="/MyNavbar/Armadio" />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
