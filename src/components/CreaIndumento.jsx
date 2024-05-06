@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { v4 as uuidv4 } from "uuid";
 
 const CreaIndumento = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -8,14 +9,17 @@ const CreaIndumento = () => {
   const [tipo, setTipo] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const indumentoId = uuidv4();
+  let imageUrl = "";
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const imageUrl = await uploadImage();
+      const token = localStorage.getItem("token");
+      imageUrl = await uploadImage(token, indumentoId);
       if (imageUrl) {
-        const indumentoId = await recuperotoken(imageUrl);
-        if (indumentoId) {
+        await saveindumento(token);
+        if (true) {
           setSuccessMessage("Indumento creato con successo");
           setImageFile(null);
           setColore("");
@@ -27,9 +31,7 @@ const CreaIndumento = () => {
     }
   };
 
-  const recuperotoken = async (imageUrl) => {
-    const token = localStorage.getItem("token");
-
+  const saveindumento = async (token) => {
     if (!token) {
       console.error("Token non trovato");
       return null;
@@ -43,9 +45,10 @@ const CreaIndumento = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          imageUrl,
+          image: imageUrl,
           colore: colore.toUpperCase(),
           tipo: tipo.toUpperCase(),
+          id: indumentoId,
         }),
       });
 
@@ -63,23 +66,26 @@ const CreaIndumento = () => {
     }
   };
 
-  const uploadImage = async () => {
+  const uploadImage = async (token, indumentoId) => {
     const formData = new FormData();
-    formData.append("file", imageFile);
-    formData.append("upload_preset", "your_cloudinary_upload_preset");
+    formData.append("image", imageFile);
 
     try {
+      console.log(indumentoId);
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload",
+        `http://localhost:3001/indumenti/upload/${indumentoId}`,
         {
           method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
           body: formData,
         }
       );
 
       if (response.ok) {
         const data = await response.json();
-        return data.secure_url;
+        return data.imageUrl;
       } else {
         const errorData = await response.json();
         setError(errorData.message);
