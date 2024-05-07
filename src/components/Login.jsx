@@ -13,10 +13,12 @@ const Login = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setError("");
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    setError("");
   };
 
   const handleFormSubmit = async (e) => {
@@ -45,6 +47,9 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Errore durante il login:", error);
+      setError(
+        "Si è verificato un errore durante il login. Si prega di riprovare."
+      );
     }
   };
 

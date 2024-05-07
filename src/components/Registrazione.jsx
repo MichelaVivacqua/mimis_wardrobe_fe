@@ -9,8 +9,9 @@ const Registrazione = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [immagineProfilo, setImmagineProfilo] = useState("");
-  const [ruolo, setRuolo] = useState("");
+  // const [ruolo, setRuolo] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -28,11 +29,14 @@ const Registrazione = () => {
           email,
           password,
           propic: immagineProfilo,
-          ruolo: ruolo.toUpperCase() === "ADMIN" ? "ADMIN" : "USER",
+          // ruolo: ruolo.toUpperCase() === "ADMIN" ? "ADMIN" : "USER",
         }),
       });
 
       if (response.ok) {
+        setSuccessMessage(
+          "UTENTE REGISTRATO CON SUCCESSO! Puoi effettuare il login."
+        );
         window.location.href = "/";
       } else {
         const errorData = await response.json();
@@ -46,6 +50,7 @@ const Registrazione = () => {
   return (
     <Form onSubmit={handleFormSubmit}>
       {error && <p className="text-danger">{error}</p>}
+      {successMessage && <p className="text-success">{successMessage}</p>}
       <div className="m-2">Inserisci qui i tuoi dati per registrarti!</div>
       <Form.Group className="m-2">
         <Form.Control
@@ -105,14 +110,14 @@ const Registrazione = () => {
         />
       </Form.Group>
 
-      <Form.Group className="m-2">
+      {/* <Form.Group className="m-2">
         <Form.Control
           type="text"
           placeholder="RUOLO (USER o ADMIN)"
           value={ruolo}
           onChange={(e) => setRuolo(e.target.value)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
       <Button type="submit" className="custom-button">
         Crea il mio account
