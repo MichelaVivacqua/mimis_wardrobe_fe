@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -50,4 +52,8 @@
 .linknondecorato {
   font-weight: normal !important;
   color: #e24b3d !important;
+}
+
+main {
+  font-family: "Quicksand", sans-serif;
 }
