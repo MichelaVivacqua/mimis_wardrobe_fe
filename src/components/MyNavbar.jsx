@@ -100,8 +100,10 @@ const MyNavbar = () => {
                   Outfits
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">
-                Elimina abbinamento
+              <NavDropdown.Item>
+                <Link to="./EliminaAbbinamento" className="linknondecorato">
+                  Elimina Abbinamento
+                </Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

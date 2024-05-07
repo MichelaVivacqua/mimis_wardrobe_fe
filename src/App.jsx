@@ -12,6 +12,7 @@ import FiltroColore from "./components/FiltroColore";
 import FiltroTipologia from "./components/FiltroTipologia";
 import CreaAbbinamento from "./components/CreaAbbinamento";
 import Outfits from "./components/Outfits";
+import EliminaAbbinamento from "./components/EliminaAbbinamento";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
               path="/MyNavbar/CreaAbbinamento"
             />
             <Route element={<Outfits />} path="/MyNavbar/Outfits" />
+            <Route
+              element={<EliminaAbbinamento />}
+              path="/MyNavbar/EliminaAbbinamento"
+            />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
