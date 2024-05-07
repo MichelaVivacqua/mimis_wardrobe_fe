@@ -32,7 +32,6 @@ const FiltroTipologia = () => {
     setSelectedType(type);
   };
 
-  // Estrai colori univoci dall'array di indumenti
   const types = Array.from(new Set(myClothes.map((clothing) => clothing.tipo)));
 
   return (

@@ -10,6 +10,7 @@ import EliminaIndumento from "./components/EliminaIndumento";
 import Armadio from "./components/Armadio";
 import FiltroColore from "./components/FiltroColore";
 import FiltroTipologia from "./components/FiltroTipologia";
+import CreaAbbinamento from "./components/CreaAbbinamento";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
             <Route
               element={<FiltroTipologia />}
               path="/MyNavbar/FiltroTipologia"
+            />
+            <Route
+              element={<CreaAbbinamento />}
+              path="/MyNavbar/CreaAbbinamento"
             />
             <Route
               element={
