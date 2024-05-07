@@ -95,8 +95,10 @@ const MyNavbar = () => {
                   Crea abbinamento
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">
-                Vedi abbinamenti
+              <NavDropdown.Item>
+                <Link to="./Outfits" className="linknondecorato">
+                  Outfits
+                </Link>
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.4">
                 Elimina abbinamento
