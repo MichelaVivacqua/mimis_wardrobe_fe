@@ -34,13 +34,18 @@ const Outfits = () => {
           return (
             <Card key={outfit.id}>
               <Card.Body>
-                <Card.Title>Abbinamento #{outfit.id}</Card.Title>
+                <Card.Title>Abbinamento {outfit.id}</Card.Title>
                 <Card.Text>
                   {outfit.indumenti &&
                     outfit.indumenti.map((indumento) => (
                       <div key={indumento.id}>
-                        <p>Tipo: {indumento.tipo}</p>
-                        <p>Colore: {indumento.colore}</p>
+                        <Card.Img
+                          variant="top"
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                        />
+                        <p>{indumento.tipo}</p>
+                        <p>{indumento.colore}</p>
                       </div>
                     ))}
                 </Card.Text>
