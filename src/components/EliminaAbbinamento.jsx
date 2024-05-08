@@ -61,7 +61,7 @@ const EliminaAbbinamento = () => {
       {myOutfits &&
         myOutfits.map((outfit) => {
           return (
-            <Card key={outfit.id} className="m-3 col-12 col-md-3 text-center">
+            <Card key={outfit.id} className="m-1 col-12 col-md-5">
               <Card.Body>
                 <Card.Title>Outfit {outfit.id}</Card.Title>
                 <Card.Text>

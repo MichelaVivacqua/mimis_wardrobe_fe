@@ -61,7 +61,7 @@ const FiltroTipologia = () => {
       {myClothes
         .filter((clothing) => !selectedType || clothing.tipo === selectedType)
         .map((clothing) => (
-          <Card key={clothing.id} className="m-1 col-12 col-md-3 text-center">
+          <Card key={clothing.id} className="m-1 col-12 col-md-3">
             <Card.Img
               variant="top"
               src={clothing.image}
