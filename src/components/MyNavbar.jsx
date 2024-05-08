@@ -69,11 +69,12 @@ const MyNavbar = () => {
                   />
                 </Link>
               </Navbar.Brand>
-              <div>
+              <div className="col-12 col-md-3 text-center">
                 <img
                   src={indumenti}
                   alt="logo"
-                  style={{ width: "150px", height: "auto" }}
+                  style={{ width: "200px", height: "auto" }}
+                  className="m-5"
                 />
                 <NavDropdown
                   title="Indumenti"
@@ -92,11 +93,12 @@ const MyNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
-              <div>
+              <div className="col-12 col-md-3 text-center">
                 <img
                   src={armadio}
                   alt="logo"
                   style={{ width: "150px", height: "auto" }}
+                  className="m-5"
                 />
                 <NavDropdown
                   title="Armadio"
@@ -120,11 +122,12 @@ const MyNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
-              <div>
+              <div className="col-12 col-md-3 text-center">
                 <img
                   src={outfit}
                   alt="logo"
                   style={{ width: "150px", height: "auto" }}
+                  className="m-5"
                 />
                 <NavDropdown
                   title="Abbinamenti"
