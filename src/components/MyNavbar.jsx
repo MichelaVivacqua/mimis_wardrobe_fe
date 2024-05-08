@@ -51,9 +51,36 @@ const MyNavbar = () => {
           <div className="mx-2">
             Ciao, {userData ? userData.name : "Utente"}!
           </div>
-          <Nav.Link onClick={handleModalOpen}>
+          {/* <Nav.Link onClick={handleModalOpen}>
             <i className="bi bi-person-bounding-box m-2"></i>
-          </Nav.Link>
+          </Nav.Link> */}
+          <NavDropdown
+            title={<i className="bi bi-person-bounding-box m-2"></i>}
+            id="basic-nav-dropdown"
+          >
+            <NavDropdown.Item
+              onClick={handleModalOpen}
+              className="linknondecorato"
+            >
+              Cambia Immagine Profilo
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="./ModificaProfilo" className="linknondecorato">
+                Modifica Dati Profilo
+              </Link>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="./EliminaProfilo" className="linknondecorato">
+                Elimina Profilo
+              </Link>
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item
+            // onClick={handleLogout}
+            >
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
         </div>
         <Navbar className="justify-content-between">
           <Navbar.Toggle aria-controls="navbarSupportedContent" />

@@ -13,6 +13,7 @@ import FiltroTipologia from "./components/FiltroTipologia";
 import CreaAbbinamento from "./components/CreaAbbinamento";
 import Outfits from "./components/Outfits";
 import EliminaAbbinamento from "./components/EliminaAbbinamento";
+import ModificaProfilo from "./components/ModificaProfilo";
 
 function App() {
   return (
@@ -42,6 +43,10 @@ function App() {
             <Route
               element={<EliminaAbbinamento />}
               path="/MyNavbar/EliminaAbbinamento"
+            />
+            <Route
+              element={<ModificaProfilo />}
+              path="/MyNavbar/ModificaProfilo"
             />
             <Route
               element={
