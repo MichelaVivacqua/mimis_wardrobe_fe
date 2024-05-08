@@ -62,23 +62,27 @@ const MyNavbar = () => {
               onClick={handleModalOpen}
               className="linknondecorato"
             >
+              <i className="bi bi-image mx-1"></i>
               Cambia Immagine Profilo
             </NavDropdown.Item>
             <NavDropdown.Item>
               <Link to="./ModificaProfilo" className="linknondecorato">
+                <i className="bi bi-pencil-square mx-1"></i>
                 Modifica Dati Profilo
               </Link>
             </NavDropdown.Item>
             <NavDropdown.Item>
               <Link to="./EliminaProfilo" className="linknondecorato">
+                <i className="bi bi-trash-fill mx-1"></i>
                 Elimina Profilo
               </Link>
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item
-            // onClick={handleLogout}
-            >
-              Logout
+            <NavDropdown.Item>
+              <Link to="/">
+                <i className="bi bi-box-arrow-right mx-1"></i>
+                Logout
+              </Link>
             </NavDropdown.Item>
           </NavDropdown>
         </div>
@@ -106,16 +110,18 @@ const MyNavbar = () => {
                 <NavDropdown
                   title="Indumenti"
                   id="basic-nav-dropdown"
-                  className="justify-content-center align-items-center mt-4"
+                  className="mt-4"
                 >
                   <NavDropdown.Item>
                     <Link to="./CreaIndumento" className="linknondecorato">
-                      Aggiungi indumento <i className="bi bi-tags-fill"></i>
+                      <i className="bi bi-tags-fill mx-1"></i>
+                      Aggiungi indumento
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./EliminaIndumento" className="linknondecorato">
-                      Elimina indumento <i className="bi bi-trash-fill"></i>
+                      <i className="bi bi-trash-fill mx-1"></i>
+                      Elimina indumento
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -127,24 +133,23 @@ const MyNavbar = () => {
                   style={{ width: "150px", height: "auto" }}
                   className="m-5"
                 />
-                <NavDropdown
-                  title="Armadio"
-                  id="basic-nav-dropdown"
-                  className="justify-content-center align-items-center"
-                >
+                <NavDropdown title="Armadio" id="basic-nav-dropdown">
                   <NavDropdown.Item>
                     <Link to="./Armadio" className="linknondecorato">
-                      Visualizza tutto <i className="bi bi-layout-split"></i>
+                      <i className="bi bi-layout-split mx-1"></i>
+                      Visualizza tutto
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./FiltroColore" className="linknondecorato">
-                      Filtra per colore <i className="bi bi-palette2"></i>
+                      <i className="bi bi-palette2 mx-1"></i>
+                      Filtra per colore
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./FiltroTipologia" className="linknondecorato">
-                      Filtra per tipo <i className="bi bi-funnel-fill"></i>
+                      <i className="bi bi-funnel-fill mx-1"></i>
+                      Filtra per tipo
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -156,25 +161,23 @@ const MyNavbar = () => {
                   style={{ width: "150px", height: "auto" }}
                   className="m-5"
                 />
-                <NavDropdown
-                  title="Abbinamenti"
-                  id="basic-nav-dropdown"
-                  className="justify-content-center align-items-center"
-                >
+                <NavDropdown title="Abbinamenti" id="basic-nav-dropdown">
                   <NavDropdown.Item>
                     <Link to="./CreaAbbinamento" className="linknondecorato">
-                      Crea abbinamento{" "}
-                      <i className="bi bi-plus-circle-fill"></i>
+                      <i className="bi bi-plus-circle-fill mx-1"></i>
+                      Crea abbinamento
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./Outfits" className="linknondecorato">
-                      Outfits <i className="bi bi-arrow-left-right"></i>
+                      <i className="bi bi-arrow-left-right mx-1"></i>
+                      Outfits
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./EliminaAbbinamento" className="linknondecorato">
-                      Elimina Abbinamento <i className="bi bi-trash-fill"></i>
+                      <i className="bi bi-trash-fill mx-1"></i>
+                      Elimina Abbinamento
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>

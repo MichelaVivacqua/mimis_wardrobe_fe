@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const ModificaProfilo = () => {
   const [username, setUsername] = useState("");
@@ -67,58 +69,63 @@ const ModificaProfilo = () => {
   };
 
   return (
-    <Form onSubmit={handleFormSubmit}>
-      {error && <p className="text-danger">{error}</p>}
-      {successMessage && <p className="text-success">{successMessage}</p>}
-      <div className="m-2">Inserisci qui i tuoi dati aggiornati</div>
-      <Form.Group className="m-2">
-        <Form.Control
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </Form.Group>
+    <div>
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
+      <Form onSubmit={handleFormSubmit}>
+        {error && <p className="text-danger">{error}</p>}
+        {successMessage && <p className="text-success">{successMessage}</p>}
+        <div className="m-2">Inserisci qui i tuoi dati aggiornati</div>
+        <Form.Group className="m-2">
+          <Form.Control
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </Form.Group>
 
-      <Form.Group className="m-2">
-        <Form.Control
-          type="text"
-          placeholder="Nome"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </Form.Group>
+        <Form.Group className="m-2">
+          <Form.Control
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </Form.Group>
 
-      <Form.Group className="m-2">
-        <Form.Control
-          type="text"
-          placeholder="Cognome"
-          value={surname}
-          onChange={(e) => setSurname(e.target.value)}
-        />
-      </Form.Group>
+        <Form.Group className="m-2">
+          <Form.Control
+            type="text"
+            placeholder="Cognome"
+            value={surname}
+            onChange={(e) => setSurname(e.target.value)}
+          />
+        </Form.Group>
 
-      <Form.Group className="m-2" controlId="formBasicEmail">
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
+        <Form.Group className="m-2" controlId="formBasicEmail">
+          <Form.Control
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
 
-      <Form.Group className="m-2" controlId="formBasicPassword">
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form.Group>
-      <Button type="submit" className="custom-button">
-        Salva
-      </Button>
-    </Form>
+        <Form.Group className="m-2" controlId="formBasicPassword">
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit" className="custom-button">
+          Salva
+        </Button>
+      </Form>
+    </div>
   );
 };
 
