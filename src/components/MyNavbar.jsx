@@ -3,6 +3,9 @@ import Row from "react-bootstrap/Row";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import logo from "../assets/OIG4 (6).jpg";
+import indumenti from "../assets/indumenti senza sfondo.png";
+import outfit from "../assets/outfit senza sfondo.png";
+import armadio from "../assets/armadio senza sfondo.png";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import ModalePropic from "./ModalePropic";
 import { useState, useEffect } from "react";
@@ -65,64 +68,86 @@ const MyNavbar = () => {
                   />
                 </Link>
               </Navbar.Brand>
-              <NavDropdown
-                title="Indumenti"
-                id="basic-nav-dropdown"
-                className="col-12 col-md-3 text-center"
-              >
-                <NavDropdown.Item>
-                  <Link to="./CreaIndumento" className="linknondecorato">
-                    Aggiungi indumento <i className="bi bi-tags-fill"></i>
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="./EliminaIndumento" className="linknondecorato">
-                    Elimina indumento <i className="bi bi-trash-fill"></i>
-                  </Link>
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown
-                title="Armadio"
-                id="basic-nav-dropdown"
-                className="col-12 col-md-3"
-              >
-                <NavDropdown.Item>
-                  <Link to="./Armadio" className="linknondecorato">
-                    Visualizza tutto <i className="bi bi-layout-split"></i>
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="./FiltroColore" className="linknondecorato">
-                    Filtra per colore <i className="bi bi-palette2"></i>
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="./FiltroTipologia" className="linknondecorato">
-                    Filtra per tipo <i className="bi bi-funnel-fill"></i>
-                  </Link>
-                </NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown
-                title="Abbinamenti"
-                id="basic-nav-dropdown"
-                className="col-12 col-md-3"
-              >
-                <NavDropdown.Item>
-                  <Link to="./CreaAbbinamento" className="linknondecorato">
-                    Crea abbinamento <i className="bi bi-plus-circle-fill"></i>
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="./Outfits" className="linknondecorato">
-                    Outfits <i className="bi bi-arrow-left-right"></i>
-                  </Link>
-                </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to="./EliminaAbbinamento" className="linknondecorato">
-                    Elimina Abbinamento <i className="bi bi-trash-fill"></i>
-                  </Link>
-                </NavDropdown.Item>
-              </NavDropdown>
+              <div>
+                <img
+                  src={indumenti}
+                  alt="logo"
+                  style={{ width: "150px", height: "auto" }}
+                />
+                <NavDropdown
+                  title="Indumenti"
+                  id="basic-nav-dropdown"
+                  className="col-12 col-md-3 text-center"
+                >
+                  <NavDropdown.Item>
+                    <Link to="./CreaIndumento" className="linknondecorato">
+                      Aggiungi indumento <i className="bi bi-tags-fill"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./EliminaIndumento" className="linknondecorato">
+                      Elimina indumento <i className="bi bi-trash-fill"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </div>
+              <div>
+                <img
+                  src={armadio}
+                  alt="logo"
+                  style={{ width: "150px", height: "auto" }}
+                />
+                <NavDropdown
+                  title="Armadio"
+                  id="basic-nav-dropdown"
+                  className="col-12 col-md-3"
+                >
+                  <NavDropdown.Item>
+                    <Link to="./Armadio" className="linknondecorato">
+                      Visualizza tutto <i className="bi bi-layout-split"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./FiltroColore" className="linknondecorato">
+                      Filtra per colore <i className="bi bi-palette2"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./FiltroTipologia" className="linknondecorato">
+                      Filtra per tipo <i className="bi bi-funnel-fill"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </div>
+              <div>
+                <img
+                  src={outfit}
+                  alt="logo"
+                  style={{ width: "150px", height: "auto" }}
+                />
+                <NavDropdown
+                  title="Abbinamenti"
+                  id="basic-nav-dropdown"
+                  className="col-12 col-md-3"
+                >
+                  <NavDropdown.Item>
+                    <Link to="./CreaAbbinamento" className="linknondecorato">
+                      Crea abbinamento{" "}
+                      <i className="bi bi-plus-circle-fill"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./Outfits" className="linknondecorato">
+                      Outfits <i className="bi bi-arrow-left-right"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./EliminaAbbinamento" className="linknondecorato">
+                      Elimina Abbinamento <i className="bi bi-trash-fill"></i>
+                    </Link>
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
