@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const CreaAbbinamento = () => {
   const [myClothes, setMyClothes] = useState([]);
@@ -60,7 +62,10 @@ const CreaAbbinamento = () => {
   };
 
   return (
-    <div className="my-clothes-container">
+    <div className="my-clothes-container row">
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
       {showSuccessMessage && (
         <Alert
           variant="success"
@@ -71,12 +76,21 @@ const CreaAbbinamento = () => {
         </Alert>
       )}
       {myClothes.map((clothing) => (
-        <Card key={clothing.id}>
-          <Card.Img variant="top" src={clothing.image} alt={clothing.tipo} />
+        <Card key={clothing.id} className="m-1 col-12 col-md-3 text-center">
+          <Card.Img
+            variant="top"
+            src={clothing.image}
+            alt={clothing.tipo}
+            style={{ width: "100px", height: "auto" }}
+            className="align-self-center"
+          />
           <Card.Body>
             <Card.Title>{clothing.tipo}</Card.Title>
             <Card.Text>{clothing.colore}</Card.Text>
-            <Button onClick={() => toggleSelection(clothing)}>
+            <Button
+              onClick={() => toggleSelection(clothing)}
+              className="custom-button"
+            >
               {selectedClothes.some((c) => c.id === clothing.id)
                 ? "Deseleziona"
                 : "Seleziona"}
@@ -84,7 +98,9 @@ const CreaAbbinamento = () => {
           </Card.Body>
         </Card>
       ))}
-      <Button onClick={createAbbinamento}>Crea Abbinamento</Button>
+      <Button onClick={createAbbinamento} className="custom-button">
+        Crea Abbinamento
+      </Button>
     </div>
   );
 };

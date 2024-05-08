@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const EliminaAbbinamento = () => {
   const [myOutfits, setMyOutfits] = useState([]);
@@ -52,14 +54,16 @@ const EliminaAbbinamento = () => {
   };
 
   return (
-    <div className="my-outfits-container">
+    <div className="my-outfits-container row">
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
       {myOutfits &&
         myOutfits.map((outfit) => {
-          console.log(outfit); // Qui inserisci il console.log
           return (
-            <Card key={outfit.id}>
+            <Card key={outfit.id} className="m-3 col-12 col-md-3 text-center">
               <Card.Body>
-                <Card.Title>Abbinamento {outfit.id}</Card.Title>
+                <Card.Title>Outfit {outfit.id}</Card.Title>
                 <Card.Text>
                   {outfit.indumenti &&
                     outfit.indumenti.map((indumento) => (
@@ -68,6 +72,8 @@ const EliminaAbbinamento = () => {
                           variant="top"
                           src={indumento.image}
                           alt={indumento.tipo}
+                          style={{ width: "100px", height: "auto" }}
+                          className="align-self-center"
                         />
                         <p>{indumento.tipo}</p>
                         <p>{indumento.colore}</p>

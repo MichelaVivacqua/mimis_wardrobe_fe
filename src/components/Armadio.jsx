@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const Armadio = () => {
   const [myClothes, setMyClothes] = useState([]);
@@ -27,10 +29,27 @@ const Armadio = () => {
   }, []);
 
   return (
-    <div className="my-clothes-container">
+    <div className="my-clothes-container row">
+      <Link to="/MyNavbar">
+        <img
+          src={logo}
+          alt="logo"
+          style={{ width: "150px", height: "auto" }}
+          className="m-3"
+        />
+      </Link>
       {myClothes.map((clothing) => (
-        <Card key={clothing.id}>
-          <Card.Img variant="top" src={clothing.image} alt={clothing.tipo} />
+        <Card
+          key={clothing.id}
+          className="d-flex m-1 col-12 col-md-3 text-center"
+        >
+          <Card.Img
+            variant="top"
+            src={clothing.image}
+            alt={clothing.tipo}
+            style={{ width: "100px", height: "auto" }}
+            className="align-self-center"
+          />
           <Card.Body>
             <Card.Title>{clothing.tipo}</Card.Title>
             <Card.Text>{clothing.colore}</Card.Text>

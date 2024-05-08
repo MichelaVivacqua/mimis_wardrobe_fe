@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const FiltroTipologia = () => {
   const [myClothes, setMyClothes] = useState([]);
@@ -35,9 +37,12 @@ const FiltroTipologia = () => {
   const types = Array.from(new Set(myClothes.map((clothing) => clothing.tipo)));
 
   return (
-    <div className="my-clothes-container">
+    <div className="my-clothes-container row">
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
       <Dropdown>
-        <Dropdown.Toggle variant="primary" id="dropdown-basic">
+        <Dropdown.Toggle className="custom-button m-2" id="dropdown-basic">
           Seleziona tipo
         </Dropdown.Toggle>
 
@@ -56,8 +61,14 @@ const FiltroTipologia = () => {
       {myClothes
         .filter((clothing) => !selectedType || clothing.tipo === selectedType)
         .map((clothing) => (
-          <Card key={clothing.id}>
-            <Card.Img variant="top" src={clothing.image} alt={clothing.tipo} />
+          <Card key={clothing.id} className="m-1 col-12 col-md-3 text-center">
+            <Card.Img
+              variant="top"
+              src={clothing.image}
+              alt={clothing.tipo}
+              style={{ width: "100px", height: "auto" }}
+              className="align-self-center"
+            />
             <Card.Body>
               <Card.Title>{clothing.tipo}</Card.Title>
               <Card.Text>{clothing.colore}</Card.Text>

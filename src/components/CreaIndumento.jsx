@@ -2,6 +2,8 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { v4 as uuidv4 } from "uuid";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const CreaIndumento = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -99,6 +101,9 @@ const CreaIndumento = () => {
 
   return (
     <div>
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
       {error && <p className="text-danger">{error}</p>}
       {successMessage && <p className="text-success">{successMessage}</p>}
       <Form onSubmit={handleFormSubmit}>

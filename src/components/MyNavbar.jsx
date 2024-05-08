@@ -68,7 +68,7 @@ const MyNavbar = () => {
               <NavDropdown
                 title="Indumenti"
                 id="basic-nav-dropdown"
-                className="col-12 col-md-3"
+                className="col-12 col-md-3 text-center"
               >
                 <NavDropdown.Item>
                   <Link to="./CreaIndumento" className="linknondecorato">
