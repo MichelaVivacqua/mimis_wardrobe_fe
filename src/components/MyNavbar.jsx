@@ -79,7 +79,7 @@ const MyNavbar = () => {
                 <NavDropdown
                   title="Indumenti"
                   id="basic-nav-dropdown"
-                  className="col-12 col-md-3 text-center"
+                  className="justify-content-center align-items-center mt-4"
                 >
                   <NavDropdown.Item>
                     <Link to="./CreaIndumento" className="linknondecorato">
@@ -103,7 +103,7 @@ const MyNavbar = () => {
                 <NavDropdown
                   title="Armadio"
                   id="basic-nav-dropdown"
-                  className="col-12 col-md-3"
+                  className="justify-content-center align-items-center"
                 >
                   <NavDropdown.Item>
                     <Link to="./Armadio" className="linknondecorato">
@@ -132,7 +132,7 @@ const MyNavbar = () => {
                 <NavDropdown
                   title="Abbinamenti"
                   id="basic-nav-dropdown"
-                  className="col-12 col-md-3"
+                  className="justify-content-center align-items-center"
                 >
                   <NavDropdown.Item>
                     <Link to="./CreaAbbinamento" className="linknondecorato">
