@@ -40,7 +40,7 @@ const MyNavbar = () => {
   }, []);
 
   return (
-    <Container fluid style={{ backgroundColor: "#E24B3D" }}>
+    <Container fluid style={{ backgroundColor: "#FFDAB9" }}>
       <Row>
         <div className="d-flex justify-content-md-end justify-content-center align-items-center py-3">
           <img
@@ -65,6 +65,7 @@ const MyNavbar = () => {
                     src={logo}
                     alt="logo"
                     style={{ width: "150px", height: "auto" }}
+                    className="m-2"
                   />
                 </Link>
               </Navbar.Brand>

@@ -60,7 +60,7 @@ const ModalePropic = ({ show, handleClose }) => {
         <Button variant="secondary" onClick={handleClose}>
           Annulla
         </Button>
-        <Button variant="primary" onClick={handleImageUpload}>
+        <Button className="custom-button" onClick={handleImageUpload}>
           Carica
         </Button>
       </Modal.Footer>
