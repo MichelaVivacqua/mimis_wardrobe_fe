@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 
@@ -10,6 +10,14 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const errorTimeout = setTimeout(() => setError(""), 5000);
+
+    return () => {
+      clearTimeout(errorTimeout);
+    };
+  }, [error]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);

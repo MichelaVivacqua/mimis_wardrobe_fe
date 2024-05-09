@@ -11,6 +11,14 @@ const CreaAbbinamento = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
+    const successTimeout = setTimeout(() => setShowSuccessMessage(""), 5000);
+
+    return () => {
+      clearTimeout(successTimeout);
+    };
+  }, [showSuccessMessage]);
+
+  useEffect(() => {
     const fetchMyClothes = async () => {
       try {
         const token = localStorage.getItem("token");

@@ -9,6 +9,16 @@ const EliminaProfilo = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    const errorTimeout = setTimeout(() => setError(""), 5000);
+    const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
+
+    return () => {
+      clearTimeout(errorTimeout);
+      clearTimeout(successTimeout);
+    };
+  }, [error, successMessage]);
+
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await fetch("http://localhost:3001/utenti/me", {
