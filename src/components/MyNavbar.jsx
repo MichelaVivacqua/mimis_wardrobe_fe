@@ -51,9 +51,6 @@ const MyNavbar = () => {
           <div className="mx-2">
             Ciao, {userData ? userData.name : "Utente"}!
           </div>
-          {/* <Nav.Link onClick={handleModalOpen}>
-            <i className="bi bi-person-bounding-box m-2"></i>
-          </Nav.Link> */}
           <NavDropdown
             title={<i className="bi bi-person-bounding-box m-2"></i>}
             id="basic-nav-dropdown"

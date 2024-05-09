@@ -34,6 +34,7 @@ const ModalePropic = ({ show, handleClose }) => {
 
       if (response.ok) {
         handleClose();
+        window.location.reload();
       } else {
         console.error(
           "Errore durante il caricamento dell'immagine:",

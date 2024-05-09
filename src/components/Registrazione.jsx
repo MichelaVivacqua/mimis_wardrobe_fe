@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const Registrazione = () => {
   const [username, setUsername] = useState("");
@@ -55,6 +57,14 @@ const Registrazione = () => {
 
   return (
     <div>
+      <Link to="/">
+        <img
+          src={logo}
+          alt="logo"
+          style={{ width: "150px", height: "auto" }}
+          className="m-3"
+        />
+      </Link>
       {successMessage ? (
         <p className="text-success">{successMessage}</p>
       ) : (
