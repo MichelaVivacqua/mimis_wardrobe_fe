@@ -149,6 +149,12 @@ const MyNavbar = () => {
                       Filtra per tipo
                     </Link>
                   </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link to="./Stagioni" className="linknondecorato">
+                      <i className="bi bi-cloud-sun-fill mx-1"></i>
+                      Stagioni
+                    </Link>
+                  </NavDropdown.Item>
                 </NavDropdown>
               </div>
               <div className="col-12 col-md-3 text-center">

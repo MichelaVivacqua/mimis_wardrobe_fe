@@ -15,6 +15,7 @@ import Outfits from "./components/Outfits";
 import EliminaAbbinamento from "./components/EliminaAbbinamento";
 import ModificaProfilo from "./components/ModificaProfilo";
 import EliminaProfilo from "./components/EliminaProfilo";
+import Stagioni from "./components/Stagioni";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               element={<EliminaProfilo />}
               path="/MyNavbar/EliminaProfilo"
             />
+            <Route element={<Stagioni />} path="/MyNavbar/Stagioni" />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
