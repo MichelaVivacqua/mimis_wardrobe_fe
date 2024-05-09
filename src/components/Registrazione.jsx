@@ -97,7 +97,7 @@ const Registrazione = () => {
         />
       </Form.Group>
 
-      <Form.Group className="m-5">
+      {/* <Form.Group className="m-5">
         <Form.Label>
           Immagine del profilo (puoi incollare un URL o caricarla dopo dal tuo
           dispositivo)
@@ -108,7 +108,7 @@ const Registrazione = () => {
           value={immagineProfilo}
           onChange={(e) => setImmagineProfilo(e.target.value)}
         />
-      </Form.Group>
+      </Form.Group> */}
 
       {/* <Form.Group className="m-2">
         <Form.Control
