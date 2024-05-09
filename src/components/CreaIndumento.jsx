@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { v4 as uuidv4 } from "uuid";
@@ -13,6 +13,16 @@ const CreaIndumento = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const indumentoId = uuidv4();
   let imageUrl = "";
+
+  useEffect(() => {
+    const errorTimeout = setTimeout(() => setError(""), 5000);
+    const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
+
+    return () => {
+      clearTimeout(errorTimeout);
+      clearTimeout(successTimeout);
+    };
+  }, [error, successMessage]);
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -114,24 +124,6 @@ const CreaIndumento = () => {
             onChange={(e) => setImageFile(e.target.files[0])}
           />
         </Form.Group>
-
-        {/* <Form.Group className="m-3">
-          <Form.Control
-            type="text"
-            placeholder="Colore"
-            value={colore}
-            onChange={(e) => setColore(e.target.value)}
-          />
-        </Form.Group>
-
-        <Form.Group className="m-3">
-          <Form.Control
-            type="text"
-            placeholder="Tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          />
-        </Form.Group> */}
 
         <Form.Group className="m-3">
           <Form.Select
