@@ -185,10 +185,16 @@ const MyNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
-              <Nav.Link className="my-5">
+              <Nav.Link className="my-4">
                 <Link to="./Meteo" className="linknondecorato">
                   <i className="bi bi-sun-fill mx-1"></i>
                   Cosa indosso oggi?
+                </Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="./Valigia" className="linknondecorato">
+                  <i className="bi bi-suitcase2-fill mx-1"></i>
+                  Prepara la valigia
                 </Link>
               </Nav.Link>
             </Nav>
