@@ -140,19 +140,19 @@ const MyNavbar = () => {
                   <NavDropdown.Item>
                     <Link to="./FiltroColore" className="linknondecorato">
                       <i className="bi bi-palette2 mx-1"></i>
-                      Filtra per colore
+                      Visualizza per colore
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./FiltroTipologia" className="linknondecorato">
                       <i className="bi bi-funnel-fill mx-1"></i>
-                      Filtra per tipo
+                      Visualizza per tipo
                     </Link>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <Link to="./Stagioni" className="linknondecorato">
                       <i className="bi bi-cloud-sun-fill mx-1"></i>
-                      Stagioni
+                      Visualizza per stagione
                     </Link>
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -185,7 +185,7 @@ const MyNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
-              <Nav.Link>
+              <Nav.Link className="my-5">
                 <Link to="./Meteo" className="linknondecorato">
                   <i className="bi bi-sun-fill mx-1"></i>
                   Cosa indosso oggi?
