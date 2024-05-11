@@ -185,6 +185,12 @@ const MyNavbar = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               </div>
+              <Nav.Link>
+                <Link to="./Meteo" className="linknondecorato">
+                  <i className="bi bi-sun-fill mx-1"></i>
+                  Cosa indosso oggi?
+                </Link>
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -16,6 +16,7 @@ import EliminaAbbinamento from "./components/EliminaAbbinamento";
 import ModificaProfilo from "./components/ModificaProfilo";
 import EliminaProfilo from "./components/EliminaProfilo";
 import Stagioni from "./components/Stagioni";
+import WeatherApp from "./components/meteo/WeatherApp";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
               path="/MyNavbar/EliminaProfilo"
             />
             <Route element={<Stagioni />} path="/MyNavbar/Stagioni" />
+            <Route element={<WeatherApp />} path="/MyNavbar/Meteo" />
             <Route
               element={
                 <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
