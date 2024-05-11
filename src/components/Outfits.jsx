@@ -83,7 +83,7 @@ const Outfits = () => {
   };
 
   return (
-    <div className="my-outfits-container row">
+    <div className="my-outfits-container row justify-content-center">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>
@@ -126,7 +126,7 @@ const Outfits = () => {
             )
         )
         .map((outfit) => (
-          <Card key={outfit.id} className="m-1 col-12 col-md-5">
+          <Card key={outfit.id} className="m-1 col-12 col-md-3">
             <Card.Body>
               <Card.Title>Outfit {outfit.id}</Card.Title>
               <Card.Text>

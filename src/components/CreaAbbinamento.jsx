@@ -64,15 +64,22 @@ const CreaAbbinamento = () => {
         throw new Error("Errore durante la creazione dell'abbinamento.");
       }
       setShowSuccessMessage(true);
+      setSelectedClothes([]); // Reset selezione dopo creazione abbinamento
+      window.scrollTo(0, 0); // Scorrimento verso l'inizio della pagina
     } catch (error) {
       console.error("Errore durante la creazione dell'abbinamento:", error);
     }
   };
 
   return (
-    <div className="my-clothes-container row">
+    <div className="my-clothes-container row justify-content-center">
       <Link to="/MyNavbar">
-        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+        <img
+          src={logo}
+          alt="logo"
+          style={{ width: "150px", height: "auto" }}
+          className="mb-3"
+        />
       </Link>
       {showSuccessMessage && (
         <Alert
