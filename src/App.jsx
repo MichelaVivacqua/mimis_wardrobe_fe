@@ -22,7 +22,10 @@ function App() {
   return (
     <BrowserRouter>
       <>
-        <main className="container-fluid">
+        <main
+          className="container-fluid"
+          style={{ backgroundColor: "#FFDAB9" }}
+        >
           <Routes>
             <Route element={<Login />} path="/" />
             <Route element={<Registrazione />} path="/Registrazione" />
