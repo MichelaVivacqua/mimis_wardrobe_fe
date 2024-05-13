@@ -99,12 +99,12 @@ const Valigia = () => {
   };
 
   return (
-    <Container>
+    <div>
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>
       <Row className="justify-content-center mt-5">
-        <Col md={6}>
+        <Col>
           <h2>Seleziona gli outfit desiderati</h2>
           <Form>
             <Form.Group controlId="outfitCount">
@@ -124,7 +124,7 @@ const Valigia = () => {
             <Form.Group controlId="seasonSelect">
               <Form.Label>Come sarà la temperatura?</Form.Label>
               <Dropdown>
-                <Dropdown.Toggle variant="primary">
+                <Dropdown.Toggle className="custom-button m-3">
                   {selectedSeason ? selectedSeason : "Seleziona stagione"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -139,12 +139,16 @@ const Valigia = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
-            <Button variant="success" onClick={handleChooseOutfits}>
-              Scegli
+            <Button
+              variant="secondary"
+              onClick={handleChooseOutfits}
+              className="m-3"
+            >
+              Cambia Outfits
             </Button>
             <Button
-              variant="primary"
-              className="ml-2"
+              variant="success"
+              className="m-3"
               onClick={handleConfirmOutfits}
             >
               Conferma
@@ -152,7 +156,7 @@ const Valigia = () => {
           </Form>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 
