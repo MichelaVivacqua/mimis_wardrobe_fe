@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Dropdown, Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import logo from "../assets/OIG4 (6).jpg";
 
 const Valigia = () => {
   const [outfitCount, setOutfitCount] = useState(1);
@@ -9,29 +11,98 @@ const Valigia = () => {
 
   const seasons = ["Primavera/Autunno", "Estate", "Inverno"];
 
+  useEffect(() => {
+    const fetchMyOutfits = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:3001/abbinamenti/miei", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Errore durante la richiesta.");
+        }
+        const data = await response.json();
+        setOutfits(data);
+      } catch (error) {
+        console.error("Errore durante la fetch:", error);
+      }
+    };
+
+    fetchMyOutfits();
+  }, []);
+
   const handleOutfitCountChange = (event) => {
     setOutfitCount(parseInt(event.target.value));
   };
 
-  const handleSeasonSelect = (season) => {
+  const handleFilterBySeason = (season) => {
     setSelectedSeason(season);
-    // Qui puoi effettuare una chiamata API per ottenere gli outfit
-    // corrispondenti alla stagione selezionata e aggiornare lo stato degli outfit.
   };
 
   const handleConfirmOutfits = () => {
-    // Qui puoi implementare la logica per confermare gli outfit selezionati dall'utente.
-    // Ad esempio, potresti mostrare un messaggio con la lista degli indumenti corrispondenti
-    // agli outfit selezionati.
+    // Ottenere la lista degli indumenti corrispondenti agli outfit selezionati
+    const selectedItems = outfits
+      .filter((outfit) => selectedOutfits.includes(outfit.id))
+      .flatMap((outfit) => outfit.items);
+
+    // Mostrare un messaggio con la lista degli indumenti corrispondenti
+    alert(
+      `ECCO LA TUA VALIGIA:\n${selectedItems
+        .map((item) => `- ${item.tipo} (${item.stagione})`)
+        .join("\n")}`
+    );
   };
 
   const handleChooseOutfits = () => {
-    // Qui puoi implementare la logica per mostrare tutti gli outfit della stagione selezionata
-    // e consentire all'utente di selezionarne un numero specifico.
+    // Verifica se è stata selezionata una stagione
+    if (!selectedSeason) {
+      alert("Seleziona prima una stagione.");
+      return;
+    }
+
+    // Filtra gli outfit della stagione selezionata
+    const outfitsOfSelectedSeason = outfits.filter(
+      (outfit) => outfit.season === selectedSeason
+    );
+
+    // Verifica se ci sono outfit disponibili per la stagione selezionata
+    if (outfitsOfSelectedSeason.length === 0) {
+      alert("Nessun outfit disponibile per la stagione selezionata.");
+      return;
+    }
+
+    // Memorizza gli outfit selezionati nello stato
+    const selectedOutfits = [];
+    for (let i = 0; i < outfitCount; i++) {
+      const selectedOutfitIndex = prompt(
+        `Seleziona l'outfit numero ${i + 1} (1-${
+          outfitsOfSelectedSeason.length
+        }):`
+      );
+      const parsedIndex = parseInt(selectedOutfitIndex);
+      if (
+        !isNaN(parsedIndex) &&
+        parsedIndex >= 1 &&
+        parsedIndex <= outfitsOfSelectedSeason.length
+      ) {
+        selectedOutfits.push(outfitsOfSelectedSeason[parsedIndex - 1].id);
+      } else {
+        alert("Inserimento non valido. Riprova.");
+        i--; // Permetti all'utente di reinserire l'indice correttamente
+      }
+    }
+
+    // Memorizza gli outfit selezionati nello stato
+    setSelectedOutfits(selectedOutfits);
   };
 
   return (
     <Container>
+      <Link to="/MyNavbar">
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+      </Link>
       <Row className="justify-content-center mt-5">
         <Col md={6}>
           <h2>Seleziona gli outfit desiderati</h2>
@@ -60,7 +131,7 @@ const Valigia = () => {
                   {seasons.map((season) => (
                     <Dropdown.Item
                       key={season}
-                      onClick={() => handleSeasonSelect(season)}
+                      onClick={() => handleFilterBySeason(season)}
                     >
                       {season}
                     </Dropdown.Item>
