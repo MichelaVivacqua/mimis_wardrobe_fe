@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Form, Button, Dropdown, Row, Col } from "react-bootstrap";
+import { Form, Button, Dropdown, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
-import Card from "react-bootstrap/Card";
 
 const Valigia = () => {
   const [outfitCount, setOutfitCount] = useState(1);
@@ -89,38 +88,36 @@ const Valigia = () => {
   };
 
   const handleConfirmOutfits = () => {
-    // Ottenere la lista degli indumenti corrispondenti agli outfit selezionati
     const selectedItems = outfits
       .filter((outfit) => selectedOutfits.includes(outfit.id))
-      .flatMap((outfit) => outfit.items);
+      .flatMap((outfit) => outfit.indumenti);
 
-    // Mostrare un messaggio con la lista degli indumenti corrispondenti
-    alert(
+    const confirmation = window.confirm(
       `ECCO LA TUA VALIGIA:\n${selectedItems
         .map((item) => `- ${item.tipo} (${item.stagione})`)
-        .join("\n")}`
+        .join("\n")}\nVuoi confermare?`
     );
+
+    if (confirmation) {
+      // Implementazione per confermare gli outfit
+    }
   };
 
   const handleChooseOutfits = () => {
-    // Verifica se è stata selezionata una stagione
     if (!selectedSeason) {
       alert("Seleziona prima una stagione.");
       return;
     }
 
-    // Filtra gli outfit della stagione selezionata
     const outfitsOfSelectedSeason = outfits.filter(
-      (outfit) => outfit.season === selectedSeason
+      (outfit) => outfit.stagione === selectedSeason
     );
 
-    // Verifica se ci sono outfit disponibili per la stagione selezionata
     if (outfitsOfSelectedSeason.length === 0) {
       alert("Nessun outfit disponibile per la stagione selezionata.");
       return;
     }
 
-    // Memorizza gli outfit selezionati nello stato
     const selectedOutfits = [];
     for (let i = 0; i < outfitCount; i++) {
       const selectedOutfitIndex = prompt(
@@ -137,11 +134,10 @@ const Valigia = () => {
         selectedOutfits.push(outfitsOfSelectedSeason[parsedIndex - 1].id);
       } else {
         alert("Inserimento non valido. Riprova.");
-        i--; // Permetti all'utente di reinserire l'indice correttamente
+        i--;
       }
     }
 
-    // Memorizza gli outfit selezionati nello stato
     setSelectedOutfits(selectedOutfits);
   };
 
@@ -175,37 +171,17 @@ const Valigia = () => {
                   {selectedSeason ? selectedSeason : "Seleziona stagione"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item
-                    key="Estate"
-                    onClick={() => handleFilterBySeason("Estate")}
-                  >
-                    <i className="bi bi-brightness-high mx-1"></i>
-                    Estate
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    key="PrimaveraAutunno"
-                    onClick={() => handleFilterBySeason("PrimaveraAutunno")}
-                  >
-                    <i className="bi bi-cloud-sun mx-1"></i>
-                    Primavera/Autunno
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    key="Inverno"
-                    onClick={() => handleFilterBySeason("Inverno")}
-                  >
-                    <i className="bi bi-snow2 mx-1"></i>
-                    Inverno
-                  </Dropdown.Item>
+                  {Object.keys(seasonsMap).map((season) => (
+                    <Dropdown.Item
+                      key={season}
+                      onClick={() => handleFilterBySeason(season)}
+                    >
+                      {season}
+                    </Dropdown.Item>
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
-            {/* <Button
-              variant="secondary"
-              onClick={handleChooseOutfits}
-              className="m-3"
-            >
-              Cambia Outfits
-            </Button> */}
             <Button
               variant="success"
               className="m-3"
@@ -216,37 +192,39 @@ const Valigia = () => {
           </Form>
         </Col>
       </Row>
-      {outfits
-        .filter(
-          (outfit) =>
-            !selectedSeason ||
-            outfit.indumenti.every((indumento) =>
-              seasonsMap[selectedSeason].includes(indumento.tipo)
-            )
-        )
-        .map((outfit) => (
-          <Card key={outfit.id} className="m-1 col-12 col-md-3">
-            <Card.Body>
-              <Card.Title>Outfit {outfit.id}</Card.Title>
-              <Card.Text>
-                {outfit.indumenti &&
-                  outfit.indumenti.map((indumento) => (
-                    <div key={indumento.id}>
-                      <Card.Img
-                        variant="top"
-                        src={indumento.image}
-                        alt={indumento.tipo}
-                        style={{ width: "100px", height: "auto" }}
-                        className="align-self-center"
-                      />
-                      <p>{indumento.tipo}</p>
-                      <p>{indumento.colore}</p>
-                    </div>
-                  ))}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
+      <Row className="justify-content-center mt-5">
+        {outfits
+          .filter(
+            (outfit) =>
+              !selectedSeason ||
+              outfit.indumenti.every((indumento) =>
+                seasonsMap[selectedSeason].includes(indumento.tipo)
+              )
+          )
+          .map((outfit) => (
+            <Col key={outfit.id} className="m-1 col-12 col-md-3">
+              <Card>
+                <Card.Body>
+                  <Card.Title>Outfit {outfit.id}</Card.Title>
+                  <Card.Text>
+                    {outfit.indumenti.map((indumento) => (
+                      <div key={indumento.id}>
+                        <img
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                          style={{ width: "100px", height: "auto" }}
+                          className="align-self-center"
+                        />
+                        <p>{indumento.tipo}</p>
+                        <p>{indumento.colore}</p>
+                      </div>
+                    ))}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+      </Row>
     </div>
   );
 };
