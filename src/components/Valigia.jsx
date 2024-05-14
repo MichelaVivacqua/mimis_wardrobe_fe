@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Dropdown, Row, Col, Card } from "react-bootstrap";
+import { Form, Dropdown, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 
@@ -7,6 +7,7 @@ const Valigia = () => {
   const [outfitCount, setOutfitCount] = useState(1);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [outfits, setOutfits] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const seasonsMap = {
     Estate: [
@@ -87,6 +88,10 @@ const Valigia = () => {
     setSelectedSeason(season);
   };
 
+  const handleConfirm = () => {
+    setShowConfirmation(true);
+  };
+
   return (
     <div>
       <Link to="/MyNavbar">
@@ -142,10 +147,14 @@ const Valigia = () => {
               </Dropdown>
             </Form.Group>
           </Form>
+          <Button className="mt-3" onClick={handleConfirm}>
+            Conferma
+          </Button>
         </Col>
       </Row>
-      {selectedSeason && (
-        <Row className="justify-content-center mt-5">
+      {showConfirmation ? (
+        <div className="mt-5">
+          <h3>Ecco cosa devi mettere in valigia:</h3>
           {outfits
             .filter(
               (outfit) =>
@@ -154,31 +163,62 @@ const Valigia = () => {
                   seasonsMap[selectedSeason].includes(indumento.tipo)
                 )
             )
-            .slice(0, outfitCount) // Aggiunto slice per limitare il numero di outfit visualizzati
+            .slice(0, outfitCount)
             .map((outfit) => (
-              <Col key={outfit.id} className="m-1 col-12 col-md-3">
-                <Card>
-                  <Card.Body>
-                    <Card.Title>Outfit {outfit.id}</Card.Title>
-                    <Card.Text>
-                      {outfit.indumenti.map((indumento) => (
-                        <div key={indumento.id}>
-                          <img
-                            src={indumento.image}
-                            alt={indumento.tipo}
-                            style={{ width: "100px", height: "auto" }}
-                            className="align-self-center"
-                          />
-                          <p>{indumento.tipo}</p>
-                          <p>{indumento.colore}</p>
-                        </div>
-                      ))}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
+              <div key={outfit.id} className="mt-3">
+                <h4>Outfit {outfit.id}</h4>
+                <ul>
+                  {outfit.indumenti.map((indumento) => (
+                    <li key={indumento.id}>
+                      <img
+                        src={indumento.image}
+                        alt={indumento.tipo}
+                        style={{ width: "50px", height: "auto" }}
+                      />
+                      {indumento.tipo} - {indumento.colore}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-        </Row>
+        </div>
+      ) : (
+        selectedSeason && (
+          <Row className="justify-content-center mt-5">
+            {outfits
+              .filter(
+                (outfit) =>
+                  !selectedSeason ||
+                  outfit.indumenti.every((indumento) =>
+                    seasonsMap[selectedSeason].includes(indumento.tipo)
+                  )
+              )
+              .slice(0, outfitCount)
+              .map((outfit) => (
+                <Col key={outfit.id} className="m-1 col-12 col-md-3">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>Outfit {outfit.id}</Card.Title>
+                      <Card.Text>
+                        {outfit.indumenti.map((indumento) => (
+                          <div key={indumento.id}>
+                            <img
+                              src={indumento.image}
+                              alt={indumento.tipo}
+                              style={{ width: "100px", height: "auto" }}
+                              className="align-self-center"
+                            />
+                            <p>{indumento.tipo}</p>
+                            <p>{indumento.colore}</p>
+                          </div>
+                        ))}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+          </Row>
+        )
       )}
     </div>
   );
