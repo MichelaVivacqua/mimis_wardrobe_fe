@@ -40,7 +40,7 @@ const MyNavbar = () => {
   }, []);
 
   return (
-    <Container fluid style={{ backgroundColor: "#FFDAB9" }}>
+    <Container fluid>
       <Row>
         <div className="d-flex justify-content-md-end justify-content-center align-items-center py-3">
           <img

@@ -26,6 +26,8 @@ function App() {
         <main
           className="container-fluid"
           style={{ backgroundColor: "#FFDAB9" }}
+          // style={{ backgroundColor: "#F79D65" }} prima palette
+          // style={{ backgroundColor: "#ff9b54" }}
         >
           <Routes>
             <Route element={<Login />} path="/" />
