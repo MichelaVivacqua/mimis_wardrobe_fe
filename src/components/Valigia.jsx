@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Button, Dropdown, Row, Col, Card } from "react-bootstrap";
+import { Form, Dropdown, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 
@@ -7,7 +7,7 @@ const Valigia = () => {
   const [outfitCount, setOutfitCount] = useState(1);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [outfits, setOutfits] = useState([]);
-  const [selectedOutfits, setSelectedOutfits] = useState([]);
+
   const seasonsMap = {
     Estate: [
       "PANTALONCINI",
@@ -87,60 +87,6 @@ const Valigia = () => {
     setSelectedSeason(season);
   };
 
-  const handleConfirmOutfits = () => {
-    const selectedItems = outfits
-      .filter((outfit) => selectedOutfits.includes(outfit.id))
-      .flatMap((outfit) => outfit.indumenti);
-
-    const confirmation = window.confirm(
-      `ECCO LA TUA VALIGIA:\n${selectedItems
-        .map((item) => `- ${item.tipo} (${item.stagione})`)
-        .join("\n")}\nVuoi confermare?`
-    );
-
-    if (confirmation) {
-      // Implementazione per confermare gli outfit
-    }
-  };
-
-  const handleChooseOutfits = () => {
-    if (!selectedSeason) {
-      alert("Seleziona prima una stagione.");
-      return;
-    }
-
-    const outfitsOfSelectedSeason = outfits.filter(
-      (outfit) => outfit.stagione === selectedSeason
-    );
-
-    if (outfitsOfSelectedSeason.length === 0) {
-      alert("Nessun outfit disponibile per la stagione selezionata.");
-      return;
-    }
-
-    const selectedOutfits = [];
-    for (let i = 0; i < outfitCount; i++) {
-      const selectedOutfitIndex = prompt(
-        `Seleziona l'outfit numero ${i + 1} (1-${
-          outfitsOfSelectedSeason.length
-        }):`
-      );
-      const parsedIndex = parseInt(selectedOutfitIndex);
-      if (
-        !isNaN(parsedIndex) &&
-        parsedIndex >= 1 &&
-        parsedIndex <= outfitsOfSelectedSeason.length
-      ) {
-        selectedOutfits.push(outfitsOfSelectedSeason[parsedIndex - 1].id);
-      } else {
-        alert("Inserimento non valido. Riprova.");
-        i--;
-      }
-    }
-
-    setSelectedOutfits(selectedOutfits);
-  };
-
   return (
     <div>
       <Link to="/MyNavbar">
@@ -195,20 +141,6 @@ const Valigia = () => {
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
-            <Button
-              variant="success"
-              className="m-3"
-              onClick={handleConfirmOutfits}
-            >
-              Conferma
-            </Button>
-            <Button
-              variant="info"
-              className="m-3"
-              onClick={handleChooseOutfits}
-            >
-              Scegli Alternativa
-            </Button>
           </Form>
         </Col>
       </Row>
