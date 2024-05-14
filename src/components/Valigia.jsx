@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Form, Dropdown, Row, Col, Card } from "react-bootstrap";
+import { Form, Dropdown, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 
@@ -7,6 +7,9 @@ const Valigia = () => {
   const [outfitCount, setOutfitCount] = useState(1);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [outfits, setOutfits] = useState([]);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showAllSeasonOutfits, setShowAllSeasonOutfits] = useState(false);
+  const [selectedOutfits, setSelectedOutfits] = useState([]);
 
   const seasonsMap = {
     Estate: [
@@ -85,7 +88,68 @@ const Valigia = () => {
 
   const handleFilterBySeason = (season) => {
     setSelectedSeason(season);
+    setShowAllSeasonOutfits(false);
+    setShowConfirmation(false);
+    setSelectedOutfits([]);
   };
+
+  const handleConfirm = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleChangeOutfit = () => {
+    setShowAllSeasonOutfits(true);
+    setShowConfirmation(false);
+    setSelectedOutfits([]);
+  };
+
+  const handleSelectOutfit = (outfitId) => {
+    setSelectedOutfits((prevSelectedOutfits) => {
+      if (prevSelectedOutfits.includes(outfitId)) {
+        return prevSelectedOutfits.filter((id) => id !== outfitId);
+      } else {
+        return [...prevSelectedOutfits, outfitId];
+      }
+    });
+  };
+
+  const filteredOutfits = outfits
+    .filter(
+      (outfit) =>
+        !selectedSeason ||
+        outfit.indumenti.every((indumento) =>
+          seasonsMap[selectedSeason].includes(indumento.tipo)
+        )
+    )
+    .slice(0, outfitCount);
+
+  const allSeasonOutfits = outfits.filter(
+    (outfit) =>
+      selectedSeason &&
+      outfit.indumenti.every((indumento) =>
+        seasonsMap[selectedSeason].includes(indumento.tipo)
+      )
+  );
+
+  const uniqueItems = (items) => {
+    const seen = new Set();
+    return items.filter((item) => {
+      const key = `${item.tipo}-${item.colore}`;
+      if (seen.has(key)) {
+        return false;
+      } else {
+        seen.add(key);
+        return true;
+      }
+    });
+  };
+
+  const selectedOutfitIndumenti = uniqueItems([
+    ...filteredOutfits.flatMap((outfit) => outfit.indumenti),
+    ...selectedOutfits.flatMap(
+      (id) => outfits.find((outfit) => outfit.id === id).indumenti
+    ),
+  ]);
 
   return (
     <div>
@@ -144,20 +208,33 @@ const Valigia = () => {
           </Form>
         </Col>
       </Row>
-      {selectedSeason && (
-        <Row className="justify-content-center mt-5">
-          {outfits
-            .filter(
-              (outfit) =>
-                !selectedSeason ||
-                outfit.indumenti.every((indumento) =>
-                  seasonsMap[selectedSeason].includes(indumento.tipo)
-                )
-            )
-            .slice(0, outfitCount) // Aggiunto slice per limitare il numero di outfit visualizzati
-            .map((outfit) => (
+      {showConfirmation ? (
+        <div className="mt-5">
+          <h3>Ecco cosa devi mettere in valigia:</h3>
+          <ul>
+            {selectedOutfitIndumenti.map((indumento) => (
+              <li key={indumento.id}>
+                <img
+                  src={indumento.image}
+                  alt={indumento.tipo}
+                  style={{ width: "50px", height: "auto" }}
+                />
+                {indumento.tipo} - {indumento.colore}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : showAllSeasonOutfits ? (
+        <div>
+          <Row className="justify-content-center mt-5">
+            {allSeasonOutfits.map((outfit) => (
               <Col key={outfit.id} className="m-1 col-12 col-md-3">
-                <Card>
+                <Card
+                  onClick={() => handleSelectOutfit(outfit.id)}
+                  className={
+                    selectedOutfits.includes(outfit.id) ? "border-primary" : ""
+                  }
+                >
                   <Card.Body>
                     <Card.Title>Outfit {outfit.id}</Card.Title>
                     <Card.Text>
@@ -178,7 +255,62 @@ const Valigia = () => {
                 </Card>
               </Col>
             ))}
-        </Row>
+          </Row>
+          {selectedOutfits.length > 0 && (
+            <div className="text-center mt-3">
+              <Button onClick={handleConfirm} variant="success">
+                Conferma
+              </Button>
+            </div>
+          )}
+        </div>
+      ) : (
+        selectedSeason && (
+          <div>
+            <Row className="justify-content-center mt-5">
+              {filteredOutfits.map((outfit) => (
+                <Col key={outfit.id} className="m-1 col-12 col-md-3">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title>Outfit {outfit.id}</Card.Title>
+                      <Card.Text>
+                        {outfit.indumenti.map((indumento) => (
+                          <div key={indumento.id}>
+                            <img
+                              src={indumento.image}
+                              alt={indumento.tipo}
+                              style={{ width: "100px", height: "auto" }}
+                              className="align-self-center"
+                            />
+                            <p>{indumento.tipo}</p>
+                            <p>{indumento.colore}</p>
+                          </div>
+                        ))}
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+            {filteredOutfits.length > 0 && (
+              <div className="text-center mt-3">
+                <Button
+                  onClick={handleConfirm}
+                  variant="success"
+                  className="m-1"
+                >
+                  Conferma
+                </Button>
+                <Button
+                  onClick={handleChangeOutfit}
+                  className="custom-button m-1"
+                >
+                  Cambia Outfit
+                </Button>
+              </div>
+            )}
+          </div>
+        )
       )}
     </div>
   );
