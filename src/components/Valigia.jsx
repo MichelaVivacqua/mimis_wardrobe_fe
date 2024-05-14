@@ -9,6 +9,7 @@ const Valigia = () => {
   const [outfits, setOutfits] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showAllSeasonOutfits, setShowAllSeasonOutfits] = useState(false);
+  const [selectedOutfits, setSelectedOutfits] = useState([]);
 
   const seasonsMap = {
     Estate: [
@@ -89,6 +90,7 @@ const Valigia = () => {
     setSelectedSeason(season);
     setShowAllSeasonOutfits(false);
     setShowConfirmation(false);
+    setSelectedOutfits([]);
   };
 
   const handleConfirm = () => {
@@ -98,6 +100,17 @@ const Valigia = () => {
   const handleChangeOutfit = () => {
     setShowAllSeasonOutfits(true);
     setShowConfirmation(false);
+    setSelectedOutfits([]);
+  };
+
+  const handleSelectOutfit = (outfitId) => {
+    setSelectedOutfits((prevSelectedOutfits) => {
+      if (prevSelectedOutfits.includes(outfitId)) {
+        return prevSelectedOutfits.filter((id) => id !== outfitId);
+      } else {
+        return [...prevSelectedOutfits, outfitId];
+      }
+    });
   };
 
   const filteredOutfits = outfits
@@ -133,6 +146,12 @@ const Valigia = () => {
 
   const combinedIndumenti = uniqueItems(
     filteredOutfits.flatMap((outfit) => outfit.indumenti)
+  );
+
+  const selectedOutfitIndumenti = uniqueItems(
+    selectedOutfits.flatMap(
+      (id) => outfits.find((outfit) => outfit.id === id).indumenti
+    )
   );
 
   return (
@@ -196,7 +215,7 @@ const Valigia = () => {
         <div className="mt-5">
           <h3>Ecco cosa devi mettere in valigia:</h3>
           <ul>
-            {combinedIndumenti.map((indumento) => (
+            {selectedOutfitIndumenti.map((indumento) => (
               <li key={indumento.id}>
                 <img
                   src={indumento.image}
@@ -209,31 +228,43 @@ const Valigia = () => {
           </ul>
         </div>
       ) : showAllSeasonOutfits ? (
-        <Row className="justify-content-center mt-5">
-          {allSeasonOutfits.map((outfit) => (
-            <Col key={outfit.id} className="m-1 col-12 col-md-3">
-              <Card>
-                <Card.Body>
-                  <Card.Title>Outfit {outfit.id}</Card.Title>
-                  <Card.Text>
-                    {outfit.indumenti.map((indumento) => (
-                      <div key={indumento.id}>
-                        <img
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          style={{ width: "100px", height: "auto" }}
-                          className="align-self-center"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
-                      </div>
-                    ))}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <div>
+          <Row className="justify-content-center mt-5">
+            {allSeasonOutfits.map((outfit) => (
+              <Col key={outfit.id} className="m-1 col-12 col-md-3">
+                <Card
+                  onClick={() => handleSelectOutfit(outfit.id)}
+                  className={
+                    selectedOutfits.includes(outfit.id) ? "border-primary" : ""
+                  }
+                >
+                  <Card.Body>
+                    <Card.Title>Outfit {outfit.id}</Card.Title>
+                    <Card.Text>
+                      {outfit.indumenti.map((indumento) => (
+                        <div key={indumento.id}>
+                          <img
+                            src={indumento.image}
+                            alt={indumento.tipo}
+                            style={{ width: "100px", height: "auto" }}
+                            className="align-self-center"
+                          />
+                          <p>{indumento.tipo}</p>
+                          <p>{indumento.colore}</p>
+                        </div>
+                      ))}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          {selectedOutfits.length > 0 && (
+            <div className="text-center mt-3">
+              <Button onClick={handleConfirm}>Conferma Selezione</Button>
+            </div>
+          )}
+        </div>
       ) : (
         selectedSeason && (
           <div>
@@ -264,10 +295,19 @@ const Valigia = () => {
             </Row>
             {filteredOutfits.length > 0 && (
               <div className="text-center mt-3">
-                <Button onClick={handleConfirm} className="mr-2">
+                <Button
+                  onClick={handleConfirm}
+                  variant="success"
+                  className="m-1"
+                >
                   Conferma
                 </Button>
-                <Button onClick={handleChangeOutfit}>Cambia Outfit</Button>
+                <Button
+                  onClick={handleChangeOutfit}
+                  className="custom-button m-1"
+                >
+                  Cambia Outfit
+                </Button>
               </div>
             )}
           </div>
