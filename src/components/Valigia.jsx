@@ -8,6 +8,7 @@ const Valigia = () => {
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [outfits, setOutfits] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showAllSeasonOutfits, setShowAllSeasonOutfits] = useState(false);
 
   const seasonsMap = {
     Estate: [
@@ -86,10 +87,17 @@ const Valigia = () => {
 
   const handleFilterBySeason = (season) => {
     setSelectedSeason(season);
+    setShowAllSeasonOutfits(false);
+    setShowConfirmation(false);
   };
 
   const handleConfirm = () => {
     setShowConfirmation(true);
+  };
+
+  const handleChangeOutfit = () => {
+    setShowAllSeasonOutfits(true);
+    setShowConfirmation(false);
   };
 
   const filteredOutfits = outfits
@@ -101,6 +109,14 @@ const Valigia = () => {
         )
     )
     .slice(0, outfitCount);
+
+  const allSeasonOutfits = outfits.filter(
+    (outfit) =>
+      selectedSeason &&
+      outfit.indumenti.every((indumento) =>
+        seasonsMap[selectedSeason].includes(indumento.tipo)
+      )
+  );
 
   const uniqueItems = (items) => {
     const seen = new Set();
@@ -192,6 +208,32 @@ const Valigia = () => {
             ))}
           </ul>
         </div>
+      ) : showAllSeasonOutfits ? (
+        <Row className="justify-content-center mt-5">
+          {allSeasonOutfits.map((outfit) => (
+            <Col key={outfit.id} className="m-1 col-12 col-md-3">
+              <Card>
+                <Card.Body>
+                  <Card.Title>Outfit {outfit.id}</Card.Title>
+                  <Card.Text>
+                    {outfit.indumenti.map((indumento) => (
+                      <div key={indumento.id}>
+                        <img
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                          style={{ width: "100px", height: "auto" }}
+                          className="align-self-center"
+                        />
+                        <p>{indumento.tipo}</p>
+                        <p>{indumento.colore}</p>
+                      </div>
+                    ))}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
       ) : (
         selectedSeason && (
           <div>
@@ -222,7 +264,10 @@ const Valigia = () => {
             </Row>
             {filteredOutfits.length > 0 && (
               <div className="text-center mt-3">
-                <Button onClick={handleConfirm}>Conferma</Button>
+                <Button onClick={handleConfirm} className="mr-2">
+                  Conferma
+                </Button>
+                <Button onClick={handleChangeOutfit}>Cambia Outfit</Button>
               </div>
             )}
           </div>
