@@ -171,14 +171,27 @@ const Valigia = () => {
                   {selectedSeason ? selectedSeason : "Seleziona stagione"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  {Object.keys(seasonsMap).map((season) => (
-                    <Dropdown.Item
-                      key={season}
-                      onClick={() => handleFilterBySeason(season)}
-                    >
-                      {season}
-                    </Dropdown.Item>
-                  ))}
+                  <Dropdown.Item
+                    key="Estate"
+                    onClick={() => handleFilterBySeason("Estate")}
+                  >
+                    <i className="bi bi-brightness-high mx-1"></i>
+                    Estate
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    key="PrimaveraAutunno"
+                    onClick={() => handleFilterBySeason("PrimaveraAutunno")}
+                  >
+                    <i className="bi bi-cloud-sun mx-1"></i>
+                    Primavera/Autunno
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    key="Inverno"
+                    onClick={() => handleFilterBySeason("Inverno")}
+                  >
+                    <i className="bi bi-snow2 mx-1"></i>
+                    Inverno
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </Form.Group>
@@ -192,39 +205,41 @@ const Valigia = () => {
           </Form>
         </Col>
       </Row>
-      <Row className="justify-content-center mt-5">
-        {outfits
-          .filter(
-            (outfit) =>
-              !selectedSeason ||
-              outfit.indumenti.every((indumento) =>
-                seasonsMap[selectedSeason].includes(indumento.tipo)
-              )
-          )
-          .map((outfit) => (
-            <Col key={outfit.id} className="m-1 col-12 col-md-3">
-              <Card>
-                <Card.Body>
-                  <Card.Title>Outfit {outfit.id}</Card.Title>
-                  <Card.Text>
-                    {outfit.indumenti.map((indumento) => (
-                      <div key={indumento.id}>
-                        <img
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          style={{ width: "100px", height: "auto" }}
-                          className="align-self-center"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
-                      </div>
-                    ))}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-      </Row>
+      {selectedSeason && (
+        <Row className="justify-content-center mt-5">
+          {outfits
+            .filter(
+              (outfit) =>
+                !selectedSeason ||
+                outfit.indumenti.every((indumento) =>
+                  seasonsMap[selectedSeason].includes(indumento.tipo)
+                )
+            )
+            .map((outfit) => (
+              <Col key={outfit.id} className="m-1 col-12 col-md-3">
+                <Card>
+                  <Card.Body>
+                    <Card.Title>Outfit {outfit.id}</Card.Title>
+                    <Card.Text>
+                      {outfit.indumenti.map((indumento) => (
+                        <div key={indumento.id}>
+                          <img
+                            src={indumento.image}
+                            alt={indumento.tipo}
+                            style={{ width: "100px", height: "auto" }}
+                            className="align-self-center"
+                          />
+                          <p>{indumento.tipo}</p>
+                          <p>{indumento.colore}</p>
+                        </div>
+                      ))}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+        </Row>
+      )}
     </div>
   );
 };
