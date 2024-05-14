@@ -92,6 +92,16 @@ const Valigia = () => {
     setShowConfirmation(true);
   };
 
+  const filteredOutfits = outfits
+    .filter(
+      (outfit) =>
+        !selectedSeason ||
+        outfit.indumenti.every((indumento) =>
+          seasonsMap[selectedSeason].includes(indumento.tipo)
+        )
+    )
+    .slice(0, outfitCount);
+
   return (
     <div>
       <Link to="/MyNavbar">
@@ -147,54 +157,34 @@ const Valigia = () => {
               </Dropdown>
             </Form.Group>
           </Form>
-          <Button className="mt-3" onClick={handleConfirm}>
-            Conferma
-          </Button>
         </Col>
       </Row>
       {showConfirmation ? (
         <div className="mt-5">
-          <h3>Ecco cosa devi mettere in valigia:</h3>
-          {outfits
-            .filter(
-              (outfit) =>
-                !selectedSeason ||
-                outfit.indumenti.every((indumento) =>
-                  seasonsMap[selectedSeason].includes(indumento.tipo)
-                )
-            )
-            .slice(0, outfitCount)
-            .map((outfit) => (
-              <div key={outfit.id} className="mt-3">
-                <h4>Outfit {outfit.id}</h4>
-                <ul>
-                  {outfit.indumenti.map((indumento) => (
-                    <li key={indumento.id}>
-                      <img
-                        src={indumento.image}
-                        alt={indumento.tipo}
-                        style={{ width: "50px", height: "auto" }}
-                      />
-                      {indumento.tipo} - {indumento.colore}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          <h4>Ecco cosa devi mettere in valigia:</h4>
+          {filteredOutfits.map((outfit) => (
+            <div key={outfit.id} className="mt-3">
+              {/* <h4>Outfit {outfit.id}</h4> */}
+              <ul>
+                {outfit.indumenti.map((indumento) => (
+                  <li key={indumento.id}>
+                    <img
+                      src={indumento.image}
+                      alt={indumento.tipo}
+                      style={{ width: "50px", height: "auto" }}
+                    />
+                    {indumento.tipo} - {indumento.colore}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       ) : (
         selectedSeason && (
-          <Row className="justify-content-center mt-5">
-            {outfits
-              .filter(
-                (outfit) =>
-                  !selectedSeason ||
-                  outfit.indumenti.every((indumento) =>
-                    seasonsMap[selectedSeason].includes(indumento.tipo)
-                  )
-              )
-              .slice(0, outfitCount)
-              .map((outfit) => (
+          <div>
+            <Row className="justify-content-center mt-5">
+              {filteredOutfits.map((outfit) => (
                 <Col key={outfit.id} className="m-1 col-12 col-md-3">
                   <Card>
                     <Card.Body>
@@ -217,7 +207,13 @@ const Valigia = () => {
                   </Card>
                 </Col>
               ))}
-          </Row>
+            </Row>
+            {filteredOutfits.length > 0 && (
+              <div className="text-center mt-3">
+                <Button onClick={handleConfirm}>Conferma</Button>
+              </div>
+            )}
+          </div>
         )
       )}
     </div>
