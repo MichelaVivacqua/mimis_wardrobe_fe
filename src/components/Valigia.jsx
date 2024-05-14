@@ -94,12 +94,7 @@ const Valigia = () => {
   };
 
   const handleConfirm = () => {
-    if (selectedOutfits.length > 0) {
-      setShowConfirmation(true);
-    } else {
-      // Mostra un messaggio all'utente per indicare che non sono stati selezionati outfit
-      alert("Seleziona almeno un outfit prima di confermare.");
-    }
+    setShowConfirmation(true);
   };
 
   const handleChangeOutfit = () => {
@@ -149,15 +144,12 @@ const Valigia = () => {
     });
   };
 
-  // const combinedIndumenti = uniqueItems(
-  //   filteredOutfits.flatMap((outfit) => outfit.indumenti)
-  // );
-
-  const selectedOutfitIndumenti = uniqueItems(
-    selectedOutfits.flatMap(
+  const selectedOutfitIndumenti = uniqueItems([
+    ...filteredOutfits.flatMap((outfit) => outfit.indumenti),
+    ...selectedOutfits.flatMap(
       (id) => outfits.find((outfit) => outfit.id === id).indumenti
-    )
-  );
+    ),
+  ]);
 
   return (
     <div>
