@@ -202,6 +202,13 @@ const Valigia = () => {
             >
               Conferma
             </Button>
+            <Button
+              variant="info"
+              className="m-3"
+              onClick={handleChooseOutfits}
+            >
+              Scegli Alternativa
+            </Button>
           </Form>
         </Col>
       </Row>
@@ -215,6 +222,7 @@ const Valigia = () => {
                   seasonsMap[selectedSeason].includes(indumento.tipo)
                 )
             )
+            .slice(0, outfitCount) // Aggiunto slice per limitare il numero di outfit visualizzati
             .map((outfit) => (
               <Col key={outfit.id} className="m-1 col-12 col-md-3">
                 <Card>
