@@ -102,6 +102,23 @@ const Valigia = () => {
     )
     .slice(0, outfitCount);
 
+  const uniqueItems = (items) => {
+    const seen = new Set();
+    return items.filter((item) => {
+      const key = `${item.tipo}-${item.colore}`;
+      if (seen.has(key)) {
+        return false;
+      } else {
+        seen.add(key);
+        return true;
+      }
+    });
+  };
+
+  const combinedIndumenti = uniqueItems(
+    filteredOutfits.flatMap((outfit) => outfit.indumenti)
+  );
+
   return (
     <div>
       <Link to="/MyNavbar">
@@ -161,24 +178,19 @@ const Valigia = () => {
       </Row>
       {showConfirmation ? (
         <div className="mt-5">
-          <h4>Ecco cosa devi mettere in valigia:</h4>
-          {filteredOutfits.map((outfit) => (
-            <div key={outfit.id} className="mt-3">
-              {/* <h4>Outfit {outfit.id}</h4> */}
-              <ul>
-                {outfit.indumenti.map((indumento) => (
-                  <li key={indumento.id}>
-                    <img
-                      src={indumento.image}
-                      alt={indumento.tipo}
-                      style={{ width: "50px", height: "auto" }}
-                    />
-                    {indumento.tipo} - {indumento.colore}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <h3>Ecco cosa devi mettere in valigia:</h3>
+          <ul>
+            {combinedIndumenti.map((indumento) => (
+              <li key={indumento.id}>
+                <img
+                  src={indumento.image}
+                  alt={indumento.tipo}
+                  style={{ width: "50px", height: "auto" }}
+                />
+                {indumento.tipo} - {indumento.colore}
+              </li>
+            ))}
+          </ul>
         </div>
       ) : (
         selectedSeason && (
