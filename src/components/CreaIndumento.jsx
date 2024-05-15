@@ -32,7 +32,7 @@ const CreaIndumento = () => {
       if (imageUrl) {
         await saveindumento(token);
         if (true) {
-          setSuccessMessage("Indumento creato con successo");
+          setSuccessMessage("INDUMENTO CREATO CON SUCCESSO");
           setImageFile(null);
           setColore("");
           setTipo("");
@@ -114,8 +114,7 @@ const CreaIndumento = () => {
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>
-      {error && <p className="text-danger">{error}</p>}
-      {successMessage && <p className="text-success">{successMessage}</p>}
+
       <Form onSubmit={handleFormSubmit}>
         <div className="m-5">Crea il tuo indumento!</div>
         <Form.Group className="m-3">
@@ -183,7 +182,8 @@ const CreaIndumento = () => {
             <option value="giubotto">Giubotto</option>
           </Form.Select>
         </Form.Group>
-
+        {error && <p className="text-danger m-2">{error}</p>}
+        {successMessage && <p className="text-success m-2">{successMessage}</p>}
         <Button type="submit" className="custom-button">
           SALVA
         </Button>
