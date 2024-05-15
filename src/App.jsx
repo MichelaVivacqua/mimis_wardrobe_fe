@@ -18,13 +18,14 @@ import EliminaProfilo from "./components/EliminaProfilo";
 import Stagioni from "./components/Stagioni";
 import WeatherApp from "./components/meteo/WeatherApp";
 import Valigia from "./components/Valigia";
+import { Container } from "react-bootstrap";
 
 function App() {
   return (
     <BrowserRouter>
       <>
-        <main
-          className="container-fluid"
+        <Container
+          fluid
           style={{ backgroundColor: "#FFDAB9" }}
           // style={{ backgroundColor: "#F79D65" }} prima palette
           // style={{ backgroundColor: "#ff9b54" }}
@@ -71,7 +72,7 @@ function App() {
               path="*"
             />
           </Routes>
-        </main>
+        </Container>
       </>
     </BrowserRouter>
   );

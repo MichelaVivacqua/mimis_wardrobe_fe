@@ -62,39 +62,41 @@ const Login = () => {
   };
 
   return (
-    <Form onSubmit={handleFormSubmit}>
-      <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
-      <Form.Group className="mt-5 mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Inserisci qui la tua email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Inserisci qui la tua password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </Form.Group>
-      {error && <p className="text-danger">{error}</p>}{" "}
-      <Button type="submit" className="custom-button">
-        Accedi
-      </Button>
-      <div className="m-3">
-        <Form.Text>Non hai ancora un account?</Form.Text>
-      </div>
-      <div>
-        <Link to="./Registrazione" className="linknondecorato">
-          Registrati
-        </Link>
-      </div>
-    </Form>
+    <div className="login-container">
+      <Form onSubmit={handleFormSubmit}>
+        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+        <Form.Group className="mt-5 mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Inserisci qui la tua email"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Inserisci qui la tua password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </Form.Group>
+        {error && <p className="text-danger">{error}</p>}{" "}
+        <Button type="submit" className="custom-button">
+          Accedi
+        </Button>
+        <div className="m-3">
+          <Form.Text>Non hai ancora un account?</Form.Text>
+        </div>
+        <div>
+          <Link to="./Registrazione" className="linknondecorato">
+            Registrati
+          </Link>
+        </div>
+      </Form>
+    </div>
   );
 };
 
