@@ -152,13 +152,13 @@ const Valigia = () => {
   ]);
 
   return (
-    <div>
+    <div className="indumento-container">
       <Link to="/MyNavbar">
-        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+        <img src={logo} alt="logo" className="logo" />
       </Link>
       <Row className="justify-content-center mt-5">
         <Col>
-          <h2>Seleziona gli outfit desiderati</h2>
+          <h2 className="my-3">Prepariamo la valigia!</h2>
           <Form>
             <Form.Group controlId="outfitCount">
               <Form.Label>Quanti outfit ti servono?</Form.Label>
@@ -175,9 +175,11 @@ const Valigia = () => {
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="seasonSelect">
-              <Form.Label>Come sarà la temperatura?</Form.Label>
+              <Form.Label className="mt-4">
+                Come sarà la temperatura?
+              </Form.Label>
               <Dropdown>
-                <Dropdown.Toggle className="custom-button m-3">
+                <Dropdown.Toggle className="custom-button">
                   {selectedSeason ? selectedSeason : "Seleziona stagione"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -186,21 +188,21 @@ const Valigia = () => {
                     onClick={() => handleFilterBySeason("Estate")}
                   >
                     <i className="bi bi-brightness-high mx-1"></i>
-                    Estate
+                    Estiva
                   </Dropdown.Item>
                   <Dropdown.Item
                     key="PrimaveraAutunno"
                     onClick={() => handleFilterBySeason("PrimaveraAutunno")}
                   >
                     <i className="bi bi-cloud-sun mx-1"></i>
-                    Primavera/Autunno
+                    Primaverile/Autunnale
                   </Dropdown.Item>
                   <Dropdown.Item
                     key="Inverno"
                     onClick={() => handleFilterBySeason("Inverno")}
                   >
                     <i className="bi bi-snow2 mx-1"></i>
-                    Inverno
+                    Invernale
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -211,13 +213,14 @@ const Valigia = () => {
       {showConfirmation ? (
         <div className="mt-5">
           <h3>Ecco cosa devi mettere in valigia:</h3>
+
           <ul>
             {selectedOutfitIndumenti.map((indumento) => (
-              <li key={indumento.id}>
+              <li key={indumento.id} className="m-3">
                 <img
                   src={indumento.image}
                   alt={indumento.tipo}
-                  style={{ width: "50px", height: "auto" }}
+                  style={{ width: "75px" }}
                 />
                 {indumento.tipo} - {indumento.colore}
               </li>
@@ -226,36 +229,37 @@ const Valigia = () => {
         </div>
       ) : showAllSeasonOutfits ? (
         <div>
-          <Row className="justify-content-center mt-5">
+          <div className="cards-container">
             {allSeasonOutfits.map((outfit) => (
-              <Col key={outfit.id} className="m-1 col-12 col-md-3">
-                <Card
-                  onClick={() => handleSelectOutfit(outfit.id)}
-                  className={
-                    selectedOutfits.includes(outfit.id) ? "border-primary" : ""
-                  }
-                >
-                  <Card.Body>
-                    <Card.Title>Outfit {outfit.id}</Card.Title>
-                    <Card.Text>
-                      {outfit.indumenti.map((indumento) => (
-                        <div key={indumento.id}>
-                          <img
-                            src={indumento.image}
-                            alt={indumento.tipo}
-                            style={{ width: "100px", height: "auto" }}
-                            className="align-self-center"
-                          />
-                          <p>{indumento.tipo}</p>
-                          <p>{indumento.colore}</p>
-                        </div>
-                      ))}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
+              <Card
+                onClick={() => handleSelectOutfit(outfit.id)}
+                className={`custom-card ${
+                  selectedOutfits.includes(outfit.id) ? "border-primary" : ""
+                }`}
+                key={outfit.id}
+              >
+                <Card.Body>
+                  <Card.Title className="card-title">
+                    Outfit {outfit.id}
+                  </Card.Title>
+                  <Card.Text className="card-text">
+                    {outfit.indumenti.map((indumento) => (
+                      <div key={indumento.id}>
+                        <Card.Img
+                          variant="top"
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                          className="card-image"
+                        />
+                        <p>{indumento.tipo}</p>
+                        <p>{indumento.colore}</p>
+                      </div>
+                    ))}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
             ))}
-          </Row>
+          </div>
           {selectedOutfits.length > 0 && (
             <div className="text-center mt-3">
               <Button onClick={handleConfirm} variant="success">
@@ -267,31 +271,30 @@ const Valigia = () => {
       ) : (
         selectedSeason && (
           <div>
-            <Row className="justify-content-center mt-5">
+            <div className="cards-container">
               {filteredOutfits.map((outfit) => (
-                <Col key={outfit.id} className="m-1 col-12 col-md-3">
-                  <Card>
-                    <Card.Body>
-                      <Card.Title>Outfit {outfit.id}</Card.Title>
-                      <Card.Text>
-                        {outfit.indumenti.map((indumento) => (
-                          <div key={indumento.id}>
-                            <img
-                              src={indumento.image}
-                              alt={indumento.tipo}
-                              style={{ width: "100px", height: "auto" }}
-                              className="align-self-center"
-                            />
-                            <p>{indumento.tipo}</p>
-                            <p>{indumento.colore}</p>
-                          </div>
-                        ))}
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
+                <Card key={outfit.id} className="custom-card">
+                  <Card.Body>
+                    <Card.Title className="card-title">
+                      Outfit {outfit.id}
+                    </Card.Title>
+                    <Card.Text className="card-text">
+                      {outfit.indumenti.map((indumento) => (
+                        <div key={indumento.id}>
+                          <Card.Img
+                            src={indumento.image}
+                            alt={indumento.tipo}
+                            className="card-image"
+                          />
+                          <p>{indumento.tipo}</p>
+                          <p>{indumento.colore}</p>
+                        </div>
+                      ))}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
               ))}
-            </Row>
+            </div>
             {filteredOutfits.length > 0 && (
               <div className="text-center mt-3">
                 <Button
