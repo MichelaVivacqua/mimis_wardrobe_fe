@@ -14,7 +14,7 @@ const Registrazione = () => {
   const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    const errorTimeout = setTimeout(() => setError(""), 5000);
+    const errorTimeout = setTimeout(() => setError(""), 10000);
     const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
 
     return () => {
