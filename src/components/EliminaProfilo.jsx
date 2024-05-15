@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 
@@ -7,6 +8,7 @@ const EliminaProfilo = () => {
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [userData, setUserData] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const errorTimeout = setTimeout(() => setError(""), 5000);
@@ -40,6 +42,14 @@ const EliminaProfilo = () => {
     fetchUserData();
   }, []);
 
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
   const deleteUser = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -64,15 +74,42 @@ const EliminaProfilo = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>
-      {error && <p className="text-danger">{error}</p>}
-      {successMessage && <p className="text-success">{successMessage}</p>}
-      <Button variant="danger" onClick={deleteUser}>
+
+      <p className="mt-5">
+        <strong>ATTENZIONE!</strong>
+        <br />
+        L'eliminazione del profilo non è reversibile, <br />e con essa perderai
+        anche tutti i tuoi dati
+      </p>
+
+      <Button variant="danger" onClick={handleShowModal} className="m-5">
         ELIMINA IL MIO PROFILO
       </Button>
+
+      {error && <p className="text-danger">{error}</p>}
+      {successMessage && <p className="text-success">{successMessage}</p>}
+
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Conferma Eliminazione Profilo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Sei sicuro di voler eliminare il tuo profilo? Non potrai più
+          recuperarlo.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Annulla
+          </Button>
+          <Button variant="danger" onClick={deleteUser}>
+            Elimina Profilo
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

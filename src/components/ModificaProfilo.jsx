@@ -79,13 +79,11 @@ const ModificaProfilo = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>
       <Form onSubmit={handleFormSubmit}>
-        {error && <p className="text-danger">{error}</p>}
-        {successMessage && <p className="text-success">{successMessage}</p>}
         <div className="m-2">Inserisci qui i tuoi dati aggiornati</div>
         <Form.Group className="m-2">
           <Form.Control
@@ -131,6 +129,8 @@ const ModificaProfilo = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        {error && <p className="text-danger">{error}</p>}
+        {successMessage && <p className="text-success">{successMessage}</p>}
         <Button type="submit" className="custom-button">
           Salva
         </Button>

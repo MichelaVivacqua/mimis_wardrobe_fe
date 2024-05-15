@@ -48,16 +48,16 @@ const ModalePropic = ({ show, handleClose }) => {
 
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header closeButton style={{ backgroundColor: "#FFDAB9" }}>
         <Modal.Title>Cambia Immagine Profilo</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{ backgroundColor: "#FFDAB9" }}>
         <Form.Group controlId="formFile" className="mb-3">
           <Form.Label>Seleziona un'immagine</Form.Label>
           <Form.Control type="file" onChange={handleImageChange} />
         </Form.Group>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer style={{ backgroundColor: "#FFDAB9" }}>
         <Button variant="secondary" onClick={handleClose}>
           Annulla
         </Button>

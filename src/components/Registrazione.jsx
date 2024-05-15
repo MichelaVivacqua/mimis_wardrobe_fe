@@ -15,7 +15,7 @@ const Registrazione = () => {
 
   useEffect(() => {
     const errorTimeout = setTimeout(() => setError(""), 5000);
-    const successTimeout = setTimeout(() => setSuccessMessage(""), 10000);
+    const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
 
     return () => {
       clearTimeout(errorTimeout);
@@ -45,7 +45,9 @@ const Registrazione = () => {
         setSuccessMessage(
           "UTENTE REGISTRATO CON SUCCESSO! Puoi effettuare il login."
         );
-        window.location.href = "/";
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 3000);
       } else {
         const errorData = await response.json();
         setError(errorData.message);
@@ -56,7 +58,7 @@ const Registrazione = () => {
   };
 
   return (
-    <div>
+    <div className="login-container">
       <Link to="/">
         <img
           src={logo}

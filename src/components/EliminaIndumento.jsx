@@ -54,7 +54,7 @@ const EliminaIndumento = () => {
   };
 
   return (
-    <div className="my-clothes-container row">
+    <div className="my-clothes-container row justify-content-center">
       <Link to="/MyNavbar">
         <img
           src={logo}
