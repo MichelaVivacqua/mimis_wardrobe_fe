@@ -110,7 +110,7 @@ const CreaIndumento = () => {
   };
 
   return (
-    <div>
+    <div className="indumento-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
       </Link>

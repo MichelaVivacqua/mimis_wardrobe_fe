@@ -64,3 +64,24 @@ main {
   align-items: center;
   background-color: #ffdab9;
 }
+
+/* CreaIndumento.css */
+.indumento-container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ffdab9;
+}
+
+/* Media query per schermi piccoli */
+@media (max-width: 768px) {
+  .indumento-container {
+    min-height: calc(40em);
+  }
+}
