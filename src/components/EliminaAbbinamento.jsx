@@ -54,42 +54,45 @@ const EliminaAbbinamento = () => {
   };
 
   return (
-    <div className="my-outfits-container row justify-content-center">
+    <div>
       <Link to="/MyNavbar">
-        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+        <img src={logo} alt="logo" className="logo" />
       </Link>
-      {myOutfits &&
-        myOutfits.map((outfit) => {
-          return (
-            <Card key={outfit.id} className="m-1 col-12 col-md-3">
-              <Card.Body>
-                <Card.Title>Outfit {outfit.id}</Card.Title>
-                <Card.Text>
-                  {outfit.indumenti &&
-                    outfit.indumenti.map((indumento) => (
-                      <div key={indumento.id}>
-                        <Card.Img
-                          variant="top"
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          style={{ width: "100px", height: "auto" }}
-                          className="align-self-center"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
-                      </div>
-                    ))}
-                </Card.Text>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDelete(outfit.id)}
-                >
-                  Elimina
-                </Button>
-              </Card.Body>
-            </Card>
-          );
-        })}
+      <div className="cards-container">
+        {myOutfits &&
+          myOutfits.map((outfit) => {
+            return (
+              <Card key={outfit.id} className="custom-card">
+                <Card.Body>
+                  <Card.Title className="card-title">
+                    Outfit {outfit.id}
+                  </Card.Title>
+                  <Card.Text className="card-text">
+                    {outfit.indumenti &&
+                      outfit.indumenti.map((indumento) => (
+                        <div key={indumento.id}>
+                          <Card.Img
+                            variant="top"
+                            src={indumento.image}
+                            alt={indumento.tipo}
+                            className="card-image"
+                          />
+                          <p>{indumento.tipo}</p>
+                          <p>{indumento.colore}</p>
+                        </div>
+                      ))}
+                  </Card.Text>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDelete(outfit.id)}
+                  >
+                    Elimina
+                  </Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+      </div>
     </div>
   );
 };
