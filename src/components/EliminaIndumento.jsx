@@ -54,33 +54,33 @@ const EliminaIndumento = () => {
   };
 
   return (
-    <div className="my-clothes-container row justify-content-center">
+    <div>
       <Link to="/MyNavbar">
-        <img
-          src={logo}
-          alt="logo"
-          style={{ width: "150px", height: "auto" }}
-          className="m-3"
-        />
+        <img src={logo} alt="logo" className="logo" />
       </Link>
-      {myClothes.map((clothing) => (
-        <Card key={clothing.id} className="m-1 col-12 col-md-3">
-          <Card.Img
-            variant="top"
-            src={clothing.image}
-            alt={clothing.tipo}
-            style={{ width: "100px", height: "auto" }}
-            className="align-self-center"
-          />
-          <Card.Body>
-            <Card.Title>{clothing.tipo}</Card.Title>
-            <Card.Text>{clothing.colore}</Card.Text>
-            <Button variant="danger" onClick={() => handleDelete(clothing.id)}>
-              Elimina
-            </Button>
-          </Card.Body>
-        </Card>
-      ))}
+      <div className="cards-container">
+        {myClothes.map((clothing) => (
+          <Card key={clothing.id} className="custom-card">
+            <Card.Img
+              variant="top"
+              src={clothing.image}
+              alt={clothing.tipo}
+              className="card-image"
+            />
+            <Card.Body>
+              <Card.Title className="card-title">{clothing.tipo}</Card.Title>
+              <Card.Text className="card-text">{clothing.colore}</Card.Text>
+              <Button
+                variant="danger"
+                onClick={() => handleDelete(clothing.id)}
+                className="delete-button"
+              >
+                Elimina
+              </Button>
+            </Card.Body>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };

@@ -84,9 +84,9 @@ const Stagioni = () => {
   };
 
   return (
-    <div className="my-clothes-container row justify-content-center">
+    <div>
       <Link to="/MyNavbar">
-        <img src={logo} alt="logo" style={{ width: "150px", height: "auto" }} />
+        <img src={logo} alt="logo" className="logo" />
       </Link>
       <Dropdown>
         <Dropdown.Toggle className="custom-button m-2" id="dropdown-basic">
@@ -118,27 +118,28 @@ const Stagioni = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      {myClothes
-        .filter(
-          (clothing) =>
-            !selectedSeason ||
-            seasonsMap[selectedSeason].includes(clothing.tipo)
-        )
-        .map((clothing) => (
-          <Card key={clothing.id} className="m-1 col-12 col-md-3">
-            <Card.Img
-              variant="top"
-              src={clothing.image}
-              alt={clothing.tipo}
-              style={{ width: "100px", height: "auto" }}
-              className="align-self-center"
-            />
-            <Card.Body>
-              <Card.Title>{clothing.tipo}</Card.Title>
-              <Card.Text>{clothing.colore}</Card.Text>
-            </Card.Body>
-          </Card>
-        ))}
+      <div className="cards-container">
+        {myClothes
+          .filter(
+            (clothing) =>
+              !selectedSeason ||
+              seasonsMap[selectedSeason].includes(clothing.tipo)
+          )
+          .map((clothing) => (
+            <Card key={clothing.id} className="custom-card">
+              <Card.Img
+                variant="top"
+                src={clothing.image}
+                alt={clothing.tipo}
+                className="card-image"
+              />
+              <Card.Body>
+                <Card.Title className="card-title">{clothing.tipo}</Card.Title>
+                <Card.Text className="card-text">{clothing.colore}</Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+      </div>
     </div>
   );
 };
