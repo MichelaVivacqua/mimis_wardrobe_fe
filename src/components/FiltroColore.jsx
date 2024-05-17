@@ -46,7 +46,7 @@ const FiltroColore = () => {
       </Link>
       <Dropdown>
         <Dropdown.Toggle className="custom-button m-2" id="dropdown-basic">
-          Seleziona colore
+          {selectedColor || "Seleziona colore"}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

@@ -43,7 +43,7 @@ const FiltroTipologia = () => {
       </Link>
       <Dropdown>
         <Dropdown.Toggle className="custom-button m-2" id="dropdown-basic">
-          Seleziona tipo
+          {selectedType || "Seleziona tipo"}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
