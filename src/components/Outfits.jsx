@@ -7,6 +7,8 @@ import logo from "../assets/OIG4 (6).jpg";
 const Outfits = () => {
   const [myOutfits, setMyOutfits] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
+  const [wornOutfits, setWornOutfits] = useState([]);
+
   const seasonsMap = {
     Estate: [
       "PANTALONCINI",
@@ -85,6 +87,37 @@ const Outfits = () => {
     setSelectedSeason(season);
   };
 
+  const markAsWorn = async (outfitId) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:3001/abbinamenti/${outfitId}/indossato`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore durante l'aggiornamento dello stato.");
+      }
+
+      const updatedOutfit = await response.json();
+
+      setWornOutfits((prevWornOutfits) => [...prevWornOutfits, outfitId]);
+      setMyOutfits((prevOutfits) =>
+        prevOutfits
+          .filter((outfit) => outfit.id !== outfitId)
+          .concat(updatedOutfit)
+      );
+    } catch (error) {
+      console.error("Errore durante l'aggiornamento dello stato:", error);
+    }
+  };
+
   return (
     <div className="indumento-container">
       <Link to="/MyNavbar">
@@ -149,7 +182,19 @@ const Outfits = () => {
                         <p>{indumento.colore}</p>
                       </div>
                     ))}
+                  {outfit.dataIndossato && (
+                    <p style={{ backgroundColor: "white", color: "#e24b3d" }}>
+                      Indossato il:{" "}
+                      {new Date(outfit.dataIndossato).toLocaleDateString()}
+                    </p>
+                  )}
                 </Card.Text>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => markAsWorn(outfit.id)}
+                >
+                  INDOSSATO!
+                </button>
               </Card.Body>
             </Card>
           ))}
