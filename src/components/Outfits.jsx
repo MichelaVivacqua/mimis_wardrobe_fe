@@ -3,11 +3,15 @@ import Card from "react-bootstrap/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const Outfits = () => {
   const [myOutfits, setMyOutfits] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState(null);
   const [wornOutfits, setWornOutfits] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOutfitId, setSelectedOutfitId] = useState(null);
 
   const seasonsMap = {
     Estate: [
@@ -87,11 +91,21 @@ const Outfits = () => {
     setSelectedSeason(season);
   };
 
-  const markAsWorn = async (outfitId) => {
+  const handleShowModal = (outfitId) => {
+    setSelectedOutfitId(outfitId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedOutfitId(null);
+  };
+
+  const markAsWorn = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/abbinamenti/${outfitId}/indossato`,
+        `http://localhost:3001/abbinamenti/${selectedOutfitId}/indossato`,
         {
           method: "PUT",
           headers: {
@@ -107,16 +121,26 @@ const Outfits = () => {
 
       const updatedOutfit = await response.json();
 
-      setWornOutfits((prevWornOutfits) => [...prevWornOutfits, outfitId]);
+      setWornOutfits((prevWornOutfits) => [
+        ...prevWornOutfits,
+        selectedOutfitId,
+      ]);
       setMyOutfits((prevOutfits) =>
         prevOutfits
-          .filter((outfit) => outfit.id !== outfitId)
+          .filter((outfit) => outfit.id !== selectedOutfitId)
           .concat(updatedOutfit)
       );
+      handleCloseModal();
     } catch (error) {
       console.error("Errore durante l'aggiornamento dello stato:", error);
     }
   };
+
+  const getSelectedOutfit = () => {
+    return myOutfits.find((outfit) => outfit.id === selectedOutfitId);
+  };
+
+  const selectedOutfit = getSelectedOutfit();
 
   return (
     <div className="indumento-container">
@@ -191,13 +215,59 @@ const Outfits = () => {
                 </Card.Text>
                 <button
                   className="btn btn-secondary"
-                  onClick={() => markAsWorn(outfit.id)}
+                  onClick={() => handleShowModal(outfit.id)}
                 >
                   INDOSSATO!
                 </button>
               </Card.Body>
             </Card>
           ))}
+        <Modal show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Conferma Indossato</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedOutfit && (
+              <>
+                <p className="text-center">
+                  STAI INDOSSANDO QUESTO OUTFIT? <br /> Lo sposteremo in fondo
+                  al tuo armadio così avrai a portata di mano sempre indumenti
+                  diversi!
+                </p>
+                <Card key={selectedOutfit.id} className="custom-card">
+                  <Card.Body>
+                    <Card.Title className="card-title">
+                      Outfit {selectedOutfit.id}
+                    </Card.Title>
+                    <Card.Text className="card-text">
+                      {selectedOutfit.indumenti &&
+                        selectedOutfit.indumenti.map((indumento) => (
+                          <div key={indumento.id}>
+                            <Card.Img
+                              variant="top"
+                              src={indumento.image}
+                              alt={indumento.tipo}
+                              className="card-image"
+                            />
+                            <p>{indumento.tipo}</p>
+                            <p>{indumento.colore}</p>
+                          </div>
+                        ))}
+                    </Card.Text>
+                  </Card.Body>
+                </Card>
+              </>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Annulla
+            </Button>
+            <Button className="custom-button" onClick={markAsWorn}>
+              Conferma
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );
