@@ -190,6 +190,19 @@ const WeatherApp = (props) => {
                                   <p>{indumento.colore}</p>
                                 </div>
                               ))}
+                            {outfit.dataIndossato && (
+                              <p
+                                style={{
+                                  backgroundColor: "white",
+                                  color: "#e24b3d",
+                                }}
+                              >
+                                Indossato il:{" "}
+                                {new Date(
+                                  outfit.dataIndossato
+                                ).toLocaleDateString()}
+                              </p>
+                            )}
                           </Card.Text>
                         </Card.Body>
                       </Card>
