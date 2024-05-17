@@ -26,6 +26,9 @@ const WeatherApp = (props) => {
       "CINTURA",
       "TACCHI",
       "ABITO",
+      "SANDALI",
+      "TUTA",
+      "COSTUME",
     ],
     Inverno: [
       "CAPPOTTO",
@@ -60,6 +63,7 @@ const WeatherApp = (props) => {
       "GIACCA",
       "GIUBOTTO",
       "ABITO",
+      "BLAZER",
     ],
   });
 

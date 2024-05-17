@@ -89,7 +89,7 @@ const EliminaAbbinamento = () => {
   const selectedOutfit = getSelectedOutfit();
 
   return (
-    <div>
+    <div className="indumento-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
