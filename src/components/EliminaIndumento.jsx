@@ -3,11 +3,14 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
+import Modal from "react-bootstrap/Modal";
 
 const EliminaIndumento = () => {
   const [myClothes, setMyClothes] = useState([]);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedClothingId, setSelectedClothingId] = useState(null);
 
   useEffect(() => {
     const errorTimeout = setTimeout(() => setError(""), 5000);
@@ -41,11 +44,21 @@ const EliminaIndumento = () => {
     fetchMyClothes();
   }, []);
 
-  const handleDelete = async (indumentoId) => {
+  const handleShowModal = (clothingId) => {
+    setSelectedClothingId(clothingId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedClothingId(null);
+  };
+
+  const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/indumenti/${indumentoId}`,
+        `http://localhost:3001/indumenti/${selectedClothingId}`,
         {
           method: "DELETE",
           headers: {
@@ -58,14 +71,22 @@ const EliminaIndumento = () => {
       }
       // Rimuovo l'indumento dall'array myClothes
       setMyClothes((prevClothes) =>
-        prevClothes.filter((clothing) => clothing.id !== indumentoId)
+        prevClothes.filter((clothing) => clothing.id !== selectedClothingId)
       );
       setSuccessMessage("INDUMENTO ELIMINATO!");
+      handleCloseModal();
     } catch (error) {
       console.error("Errore durante l'eliminazione:", error);
       setError("Errore durante l'eliminazione dell'indumento.");
+      handleCloseModal();
     }
   };
+
+  const getSelectedClothing = () => {
+    return myClothes.find((clothing) => clothing.id === selectedClothingId);
+  };
+
+  const selectedClothing = getSelectedClothing();
 
   return (
     <div>
@@ -86,7 +107,7 @@ const EliminaIndumento = () => {
               <Card.Text className="card-text">{clothing.colore}</Card.Text>
               <Button
                 variant="danger"
-                onClick={() => handleDelete(clothing.id)}
+                onClick={() => handleShowModal(clothing.id)}
                 className="delete-button"
               >
                 Elimina
@@ -99,6 +120,45 @@ const EliminaIndumento = () => {
       {successMessage && (
         <div className="text-success m-2">{successMessage}</div>
       )}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Conferma Eliminazione Indumento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedClothing && (
+            <>
+              <p>
+                Sei sicuro di voler eliminare questo indumento? Non potrai più
+                recuperarlo.
+              </p>
+              <Card key={selectedClothing.id} className="custom-card">
+                <Card.Img
+                  variant="top"
+                  src={selectedClothing.image}
+                  alt={selectedClothing.tipo}
+                  className="card-image"
+                />
+                <Card.Body>
+                  <Card.Title className="card-title">
+                    {selectedClothing.tipo}
+                  </Card.Title>
+                  <Card.Text className="card-text">
+                    {selectedClothing.colore}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Annulla
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Elimina
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
