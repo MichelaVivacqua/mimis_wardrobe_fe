@@ -10,6 +10,7 @@ const Registrazione = () => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -25,6 +26,11 @@ const Registrazione = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setError("Le password non corrispondono");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:3001/auth/register", {
@@ -115,6 +121,15 @@ const Registrazione = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+          </Form.Group>
+
+          <Form.Group className="m-2" controlId="formBasicConfirmPassword">
+            <Form.Control
+              type="password"
+              placeholder="Conferma Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </Form.Group>
 
