@@ -125,34 +125,6 @@ const CreaIndumento = () => {
         </Form.Group>
 
         <Form.Group className="m-3">
-          <Form.Select
-            value={colore}
-            onChange={(e) => setColore(e.target.value)}
-          >
-            <option value="">Colore</option>
-            <option value="bianco">Bianco</option>
-            <option value="NERO">Nero</option>
-            <option value="bordeaux">Bordeaux</option>
-            <option value="rosso">Rosso</option>
-            <option value="arancione">Arancione</option>
-            <option value="giallo">Giallo</option>
-            <option value="verde">Verde</option>
-            <option value="blu">Blu</option>
-            <option value="ciano">Ciano</option>
-            <option value="azzurro">Azzurro</option>
-            <option value="viola">Viola</option>
-            <option value="lilla">Lilla</option>
-            <option value="rosa">Rosa</option>
-            <option value="magenta">Magenta</option>
-            <option value="grigio">Grigio</option>
-            <option value="marrone">Marrone</option>
-            <option value="beige">Beige</option>
-            <option value="oro">Oro</option>
-            <option value="ARGENTO">Argento</option>
-          </Form.Select>
-        </Form.Group>
-
-        <Form.Group className="m-3">
           <Form.Select value={tipo} onChange={(e) => setTipo(e.target.value)}>
             <option value="">Tipo</option>
             <option value="jeans">Jeans</option>
@@ -180,8 +152,41 @@ const CreaIndumento = () => {
             <option value="trench">Trench</option>
             <option value="giacca">Giacca</option>
             <option value="giubotto">Giubotto</option>
+            <option value="blazer">Blazer</option>
+            <option value="costume">Costume</option>
           </Form.Select>
         </Form.Group>
+
+        <Form.Group className="m-3">
+          <Form.Select
+            value={colore}
+            onChange={(e) => setColore(e.target.value)}
+          >
+            <option value="">Colore</option>
+            <option value="bianco">Bianco</option>
+            <option value="NERO">Nero</option>
+            <option value="bordeaux">Bordeaux</option>
+            <option value="rosso">Rosso</option>
+            <option value="arancione">Arancione</option>
+            <option value="giallo">Giallo</option>
+            <option value="verde">Verde</option>
+            <option value="blu">Blu</option>
+            <option value="ciano">Ciano</option>
+            <option value="azzurro">Azzurro</option>
+            <option value="viola">Viola</option>
+            <option value="lilla">Lilla</option>
+            <option value="rosa">Rosa</option>
+            <option value="magenta">Magenta</option>
+            <option value="grigio">Grigio</option>
+            <option value="marrone">Marrone</option>
+            <option value="beige">Beige</option>
+            <option value="oro">Oro</option>
+            <option value="ARGENTO">Argento</option>
+            <option value="fantasia">Fantasia</option>
+            <option value="multicolor">Multicolor</option>
+          </Form.Select>
+        </Form.Group>
+
         {error && <p className="text-danger m-2">{error}</p>}
         {successMessage && <p className="text-success m-2">{successMessage}</p>}
         <Button type="submit" className="custom-button">

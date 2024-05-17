@@ -3,9 +3,24 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
+import Modal from "react-bootstrap/Modal";
 
 const EliminaAbbinamento = () => {
   const [myOutfits, setMyOutfits] = useState([]);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedOutfitId, setSelectedOutfitId] = useState(null);
+
+  useEffect(() => {
+    const errorTimeout = setTimeout(() => setError(""), 5000);
+    const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
+
+    return () => {
+      clearTimeout(errorTimeout);
+      clearTimeout(successTimeout);
+    };
+  }, [error, successMessage]);
 
   useEffect(() => {
     const fetchMyOutfits = async () => {
@@ -29,11 +44,21 @@ const EliminaAbbinamento = () => {
     fetchMyOutfits();
   }, []);
 
-  const handleDelete = async (abbinamentoId) => {
+  const handleShowModal = (outfitId) => {
+    setSelectedOutfitId(outfitId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedOutfitId(null);
+  };
+
+  const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/abbinamenti/${abbinamentoId}`,
+        `http://localhost:3001/abbinamenti/${selectedOutfitId}`,
         {
           method: "DELETE",
           headers: {
@@ -44,14 +69,24 @@ const EliminaAbbinamento = () => {
       if (!response.ok) {
         throw new Error("Errore durante l'eliminazione dell'abbinamento.");
       }
-      // Rimuovo l'indumento dall'array myOutfits
+      // Rimuovo l'outfit dall'array myOutfits
       setMyOutfits((prevOutfits) =>
-        prevOutfits.filter((outfit) => outfit.id !== abbinamentoId)
+        prevOutfits.filter((outfit) => outfit.id !== selectedOutfitId)
       );
+      setSuccessMessage("ABBINAMENTO ELIMINATO!");
+      handleCloseModal();
     } catch (error) {
       console.error("Errore durante l'eliminazione:", error);
+      setError("Errore durante l'eliminazione dell'abbinamento.");
+      handleCloseModal();
     }
   };
+
+  const getSelectedOutfit = () => {
+    return myOutfits.find((outfit) => outfit.id === selectedOutfitId);
+  };
+
+  const selectedOutfit = getSelectedOutfit();
 
   return (
     <div>
@@ -60,16 +95,60 @@ const EliminaAbbinamento = () => {
       </Link>
       <div className="cards-container">
         {myOutfits &&
-          myOutfits.map((outfit) => {
-            return (
-              <Card key={outfit.id} className="custom-card">
+          myOutfits.map((outfit) => (
+            <Card key={outfit.id} className="custom-card">
+              <Card.Body>
+                <Card.Title className="card-title">
+                  Outfit {outfit.id}
+                </Card.Title>
+                <Card.Text className="card-text">
+                  {outfit.indumenti &&
+                    outfit.indumenti.map((indumento) => (
+                      <div key={indumento.id}>
+                        <Card.Img
+                          variant="top"
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                          className="card-image"
+                        />
+                        <p>{indumento.tipo}</p>
+                        <p>{indumento.colore}</p>
+                      </div>
+                    ))}
+                </Card.Text>
+                <Button
+                  variant="danger"
+                  onClick={() => handleShowModal(outfit.id)}
+                >
+                  Elimina
+                </Button>
+              </Card.Body>
+            </Card>
+          ))}
+      </div>
+      {error && <div className="text-danger m-2">{error}</div>}
+      {successMessage && (
+        <div className="text-success m-2">{successMessage}</div>
+      )}
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Conferma Eliminazione Outfit</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedOutfit && (
+            <>
+              <p>
+                Sei sicuro di voler eliminare questo outfit? Non potrai più
+                recuperarlo.
+              </p>
+              <Card key={selectedOutfit.id} className="custom-card">
                 <Card.Body>
                   <Card.Title className="card-title">
-                    Outfit {outfit.id}
+                    Outfit {selectedOutfit.id}
                   </Card.Title>
                   <Card.Text className="card-text">
-                    {outfit.indumenti &&
-                      outfit.indumenti.map((indumento) => (
+                    {selectedOutfit.indumenti &&
+                      selectedOutfit.indumenti.map((indumento) => (
                         <div key={indumento.id}>
                           <Card.Img
                             variant="top"
@@ -82,17 +161,20 @@ const EliminaAbbinamento = () => {
                         </div>
                       ))}
                   </Card.Text>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(outfit.id)}
-                  >
-                    Elimina
-                  </Button>
                 </Card.Body>
               </Card>
-            );
-          })}
-      </div>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Annulla
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Elimina
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

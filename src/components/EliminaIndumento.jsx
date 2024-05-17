@@ -6,6 +6,18 @@ import logo from "../assets/OIG4 (6).jpg";
 
 const EliminaIndumento = () => {
   const [myClothes, setMyClothes] = useState([]);
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    const errorTimeout = setTimeout(() => setError(""), 5000);
+    const successTimeout = setTimeout(() => setSuccessMessage(""), 5000);
+
+    return () => {
+      clearTimeout(errorTimeout);
+      clearTimeout(successTimeout);
+    };
+  }, [error, successMessage]);
 
   useEffect(() => {
     const fetchMyClothes = async () => {
@@ -48,8 +60,10 @@ const EliminaIndumento = () => {
       setMyClothes((prevClothes) =>
         prevClothes.filter((clothing) => clothing.id !== indumentoId)
       );
+      setSuccessMessage("INDUMENTO ELIMINATO!");
     } catch (error) {
       console.error("Errore durante l'eliminazione:", error);
+      setError("Errore durante l'eliminazione dell'indumento.");
     }
   };
 
@@ -81,6 +95,10 @@ const EliminaIndumento = () => {
           </Card>
         ))}
       </div>
+      {error && <div className="text-danger m-2">{error}</div>}
+      {successMessage && (
+        <div className="text-success m-2">{successMessage}</div>
+      )}
     </div>
   );
 };
