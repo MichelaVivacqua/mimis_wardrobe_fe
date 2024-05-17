@@ -129,7 +129,8 @@ const EliminaIndumento = () => {
             <>
               <p>
                 Sei sicuro di voler eliminare questo indumento? Non potrai più
-                recuperarlo.
+                recuperarlo. Verrano eliminati anche gli outfit che lo
+                prevedono.
               </p>
               <Card key={selectedClothing.id} className="custom-card">
                 <Card.Img

@@ -23,6 +23,9 @@ const Valigia = () => {
       "CINTURA",
       "TACCHI",
       "ABITO",
+      "TUTA",
+      "SANDALI",
+      "COSTUME",
     ],
     Inverno: [
       "CAPPOTTO",
@@ -57,6 +60,7 @@ const Valigia = () => {
       "GIACCA",
       "GIUBOTTO",
       "ABITO",
+      "BLAZER",
     ],
   };
 

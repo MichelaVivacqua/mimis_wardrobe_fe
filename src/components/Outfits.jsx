@@ -19,6 +19,9 @@ const Outfits = () => {
       "CINTURA",
       "TACCHI",
       "ABITO",
+      "SANDALI",
+      "TUTA",
+      "COSTUME",
     ],
     Inverno: [
       "CAPPOTTO",

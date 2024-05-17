@@ -61,6 +61,9 @@ const Stagioni = () => {
       "CAPPOTTO",
       "GIUBOTTO",
       "ABITO",
+      "SANDALI",
+      "TUTA",
+      "COSTUME",
     ],
     PrimaveraAutunno: [
       "GIUBBOTTO",
@@ -76,6 +79,7 @@ const Stagioni = () => {
       "GIACCA",
       "GIUBOTTO",
       "ABITO",
+      "BLAZER",
     ],
   };
 
