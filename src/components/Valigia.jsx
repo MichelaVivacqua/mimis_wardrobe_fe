@@ -23,8 +23,8 @@ const Valigia = () => {
       "CINTURA",
       "TACCHI",
       "ABITO",
-      "TUTA",
       "SANDALI",
+      "TUTA",
       "COSTUME",
     ],
     Inverno: [
