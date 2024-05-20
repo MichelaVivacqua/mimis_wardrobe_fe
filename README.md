@@ -1,6 +1,7 @@
 # mimis_wardrobe
 
 🎀Mimi's Wardrobe è l'app che risponderà tutte le volte alla tua domanda: ❔"Che cosa indosso oggi?"❔
+
 Registra i tuoi indumenti ed i tuoi accessori, consultali, filtrali! 👗🕶️
 Crea i tuoi outfit, ordinali per occasione, segna quando li indossi,
 e sfrutterai al meglio ogni angolo del tuo armadio! 🛍️👠
