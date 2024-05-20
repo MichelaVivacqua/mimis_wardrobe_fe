@@ -99,6 +99,7 @@ const Valigia = () => {
 
   const handleConfirm = () => {
     setShowConfirmation(true);
+    setShowAllSeasonOutfits(false);
   };
 
   const handleChangeOutfit = () => {
@@ -148,12 +149,15 @@ const Valigia = () => {
     });
   };
 
-  const selectedOutfitIndumenti = uniqueItems([
-    ...filteredOutfits.flatMap((outfit) => outfit.indumenti),
-    ...selectedOutfits.flatMap(
-      (id) => outfits.find((outfit) => outfit.id === id).indumenti
-    ),
-  ]);
+  const selectedOutfitIndumenti = showConfirmation
+    ? uniqueItems(
+        selectedOutfits.length > 0
+          ? selectedOutfits.flatMap(
+              (id) => outfits.find((outfit) => outfit.id === id).indumenti
+            )
+          : filteredOutfits.flatMap((outfit) => outfit.indumenti)
+      )
+    : uniqueItems(filteredOutfits.flatMap((outfit) => outfit.indumenti));
 
   return (
     <div className="indumento-container">
@@ -217,7 +221,6 @@ const Valigia = () => {
       {showConfirmation ? (
         <div className="mt-5">
           <h3>Ecco cosa devi mettere in valigia:</h3>
-
           <ul>
             {selectedOutfitIndumenti.map((indumento) => (
               <li key={indumento.id} className="m-3">
