@@ -20,7 +20,7 @@ Mantieni anche tu il tuo armadio a portata di app 📱
 
 1. Clona il repository da GitHub.
 2. Esegui `npm install` per installare le dipendenze.
-3. Configura il file `.env` con le variabili d'ambiente necessarie (API KEY per il meteo)
+3. Configura il file `config.js` con la variabile d'ambiente config (contenente l'API KEY per il meteo)
 4. Esegui `npm run dev` per avviare l'applicazione
 
 ## Link al repository back-end
