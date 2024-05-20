@@ -15,6 +15,7 @@ const Outfits = () => {
   const [selectedOutfitId, setSelectedOutfitId] = useState(null);
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [rating, setRating] = useState(1);
+  const [sortByRating, setSortByRating] = useState(false);
 
   const seasonsMap = {
     Estate: [
@@ -177,11 +178,14 @@ const Outfits = () => {
 
       const updatedOutfit = await response.json();
 
-      setMyOutfits((prevOutfits) =>
-        prevOutfits.map((outfit) =>
-          outfit.id === selectedOutfitId ? updatedOutfit : outfit
-        )
-      );
+      setMyOutfits((prevOutfits) => {
+        const index = prevOutfits.findIndex(
+          (outfit) => outfit.id === selectedOutfitId
+        );
+        const updatedOutfits = [...prevOutfits];
+        updatedOutfits[index] = updatedOutfit;
+        return updatedOutfits;
+      });
 
       handleCloseRatingModal();
     } catch (error) {
@@ -192,6 +196,10 @@ const Outfits = () => {
   const getSelectedOutfit = () => {
     return myOutfits.find((outfit) => outfit.id === selectedOutfitId);
   };
+
+  const sortedOutfits = sortByRating
+    ? [...myOutfits].sort((a, b) => (b.valutazione || 0) - (a.valutazione || 0))
+    : myOutfits;
 
   const selectedOutfit = getSelectedOutfit();
 
@@ -229,9 +237,18 @@ const Outfits = () => {
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-
+      <button
+        className="custom-button m-2"
+        onClick={() => setSortByRating(!sortByRating)}
+      >
+        {sortByRating ? (
+          <i className="bi bi-arrow-counterclockwise"></i>
+        ) : (
+          "Ordina per valutazione"
+        )}
+      </button>
       <div className="cards-container">
-        {myOutfits
+        {sortedOutfits
           .filter(
             (outfit) =>
               !selectedSeason ||
