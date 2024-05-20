@@ -278,7 +278,10 @@ const Outfits = () => {
               )
           )
           .map((outfit) => (
-            <Card key={outfit.id} className="custom-card">
+            <Card
+              key={outfit.id}
+              className="custom-card col-5 col-md-3 col-lg-2"
+            >
               <Card.Body>
                 <Card.Title className="card-title">
                   Outfit {outfit.id}
@@ -324,13 +327,13 @@ const Outfits = () => {
                   </div>
                 </Card.Text>
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-secondary m-1"
                   onClick={() => handleShowModal(outfit.id)}
                 >
                   INDOSSATO!
                 </button>
                 <button
-                  className="btn btn-secondary m-2"
+                  className="btn btn-secondary"
                   onClick={() => shareOutfit(outfit.id)}
                 >
                   <i className="bi bi-share-fill mx-1"></i>
@@ -339,7 +342,11 @@ const Outfits = () => {
               </Card.Body>
             </Card>
           ))}
-        <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal
+          show={showModal}
+          onHide={handleCloseModal}
+          className="custom-modal"
+        >
           <Modal.Header closeButton>
             <Modal.Title>Conferma</Modal.Title>
           </Modal.Header>
