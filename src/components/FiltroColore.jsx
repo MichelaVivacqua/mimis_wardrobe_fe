@@ -34,13 +34,12 @@ const FiltroColore = () => {
     setSelectedColor(color);
   };
 
-  // Estrai colori univoci dall'array di indumenti
   const uniqueColors = Array.from(
     new Set(myClothes.map((clothing) => clothing.colore))
   );
 
   return (
-    <div>
+    <div className="indumento-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
