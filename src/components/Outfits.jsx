@@ -198,6 +198,26 @@ const Outfits = () => {
     return myOutfits.find((outfit) => outfit.id === selectedOutfitId);
   };
 
+  const shareOutfit = (outfitId) => {
+    const outfitUrl = `${window.location.origin}/outfit/${outfitId}`;
+    const message = `Ciao! Cosa ne pensi se indosso quest'outfit? ${outfitUrl}`;
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Guarda il mio outfit!",
+          text: message,
+          url: outfitUrl,
+        })
+        .catch((error) =>
+          console.error("Errore durante la condivisione:", error)
+        );
+    } else {
+      navigator.clipboard.writeText(outfitUrl).then(() => {
+        alert("Link copiato negli appunti!");
+      });
+    }
+  };
+
   const sortedOutfits = sortByRating
     ? [...myOutfits].sort((a, b) => (b.valutazione || 0) - (a.valutazione || 0))
     : myOutfits;
@@ -309,12 +329,19 @@ const Outfits = () => {
                 >
                   INDOSSATO!
                 </button>
+                <button
+                  className="btn btn-secondary m-2"
+                  onClick={() => shareOutfit(outfit.id)}
+                >
+                  <i className="bi bi-share-fill mx-1"></i>
+                  Chiedi un consiglio!
+                </button>
               </Card.Body>
             </Card>
           ))}
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Conferma Indossato</Modal.Title>
+            <Modal.Title>Conferma</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {selectedOutfit && (
