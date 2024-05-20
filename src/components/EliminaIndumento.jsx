@@ -95,7 +95,10 @@ const EliminaIndumento = () => {
       </Link>
       <div className="cards-container">
         {myClothes.map((clothing) => (
-          <Card key={clothing.id} className="custom-card">
+          <Card
+            key={clothing.id}
+            className="custom-card col-5 col-md-3 col-lg-2"
+          >
             <Card.Img
               variant="top"
               src={clothing.image}
