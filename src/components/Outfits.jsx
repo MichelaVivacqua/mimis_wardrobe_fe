@@ -25,9 +25,6 @@ const Outfits = () => {
       "CINTURA",
       "TACCHI",
       "ABITO",
-      "SANDALI",
-      "TUTA",
-      "COSTUME",
     ],
     Inverno: [
       "CAPPOTTO",
@@ -47,6 +44,9 @@ const Outfits = () => {
       "CAPPOTTO",
       "GIUBOTTO",
       "ABITO",
+      "SANDALI",
+      "TUTA",
+      "COSTUME",
     ],
     PrimaveraAutunno: [
       "GIUBBOTTO",
@@ -62,6 +62,7 @@ const Outfits = () => {
       "GIACCA",
       "GIUBOTTO",
       "ABITO",
+      "BLAZER",
     ],
   };
 
