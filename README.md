@@ -26,6 +26,10 @@ Mantieni anche tu il tuo armadio a portata di app 📱
 🖇️
 https://github.com/MichelaVivacqua/Mimi-sWardrobe
 
+## Link alla versione deployata:
+
+da aggiungere
+
 ## Contatti
 
 Per domande, segnalazioni di bug o suggerimenti, contattami all'indirizzo email [vivacquamichela@gmail.com] !
