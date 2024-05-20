@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import Rating from "react-rating";
 
 const Outfits = () => {
   const [myOutfits, setMyOutfits] = useState([]);
@@ -113,7 +113,7 @@ const Outfits = () => {
   const handleCloseRatingModal = () => {
     setShowRatingModal(false);
     setSelectedOutfitId(null);
-    setRating(0);
+    setRating(1);
   };
 
   const markAsWorn = async () => {
@@ -265,23 +265,31 @@ const Outfits = () => {
                       {new Date(outfit.dataIndossato).toLocaleDateString()}
                     </p>
                   )}
-                  {outfit.valutazione && (
-                    <p style={{ backgroundColor: "white", color: "#e24b3d" }}>
-                      {outfit.valutazione}
-                    </p>
-                  )}
+                  <div>
+                    <Rating
+                      initialRating={outfit.valutazione || 0}
+                      readonly
+                      emptySymbol={
+                        <i className="bi bi-star" style={{ color: "gold" }}></i>
+                      }
+                      fullSymbol={
+                        <i
+                          className="bi bi-star-fill"
+                          style={{ color: "gold" }}
+                        ></i>
+                      }
+                    />
+                    <i
+                      className="bi bi-pencil mx-1"
+                      onClick={() => handleShowRatingModal(outfit.id)}
+                    ></i>
+                  </div>
                 </Card.Text>
                 <button
                   className="btn btn-secondary"
                   onClick={() => handleShowModal(outfit.id)}
                 >
                   INDOSSATO!
-                </button>
-                <button
-                  className="btn btn-primary"
-                  onClick={() => handleShowRatingModal(outfit.id)}
-                >
-                  VALUTA
                 </button>
               </Card.Body>
             </Card>
@@ -341,23 +349,23 @@ const Outfits = () => {
               <>
                 <p className="text-center">
                   VALUTA QUESTO OUTFIT DA 1 A 5 STELLE:
+                  <br />
+                  1 STELLA = molto sportivo
+                  <br />5 STELLE = molto elegante
                 </p>
-                <Form>
-                  <Form.Group controlId="rating">
-                    <Form.Label>Valutazione</Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={rating}
-                      onChange={(e) => setRating(parseInt(e.target.value))}
-                    >
-                      <option value="1">1 stella</option>
-                      <option value="2">2 stelle</option>
-                      <option value="3">3 stelle</option>
-                      <option value="4">4 stelle</option>
-                      <option value="5">5 stelle</option>
-                    </Form.Control>
-                  </Form.Group>
-                </Form>
+                <Rating
+                  initialRating={rating}
+                  emptySymbol={
+                    <i className="bi bi-star" style={{ color: "gold" }}></i>
+                  }
+                  fullSymbol={
+                    <i
+                      className="bi bi-star-fill"
+                      style={{ color: "gold" }}
+                    ></i>
+                  }
+                  onChange={(value) => setRating(value)}
+                />
               </>
             )}
           </Modal.Body>

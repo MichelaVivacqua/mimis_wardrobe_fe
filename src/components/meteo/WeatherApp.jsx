@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Form, FormControl, Button } from "react-bootstrap";
@@ -8,7 +7,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/OIG4 (6).jpg";
 import Card from "react-bootstrap/Card";
 
-const WeatherApp = (props) => {
+const WeatherApp = () => {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
