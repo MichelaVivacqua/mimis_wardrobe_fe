@@ -1,4 +1,4 @@
-# mimis_wardrobe
+# Mimi's_Wardrobe
 
 🎀Mimi's Wardrobe è l'app che risponderà tutte le volte alla tua domanda: ❔"Che cosa indosso oggi?"❔
 
