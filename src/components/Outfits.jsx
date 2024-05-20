@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/OIG4 (6).jpg";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 const Outfits = () => {
   const [myOutfits, setMyOutfits] = useState([]);
@@ -12,6 +13,8 @@ const Outfits = () => {
   const [wornOutfits, setWornOutfits] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedOutfitId, setSelectedOutfitId] = useState(null);
+  const [showRatingModal, setShowRatingModal] = useState(false);
+  const [rating, setRating] = useState(1);
 
   const seasonsMap = {
     Estate: [
@@ -25,6 +28,9 @@ const Outfits = () => {
       "CINTURA",
       "TACCHI",
       "ABITO",
+      "SANDALI",
+      "TUTA",
+      "COSTUME",
     ],
     Inverno: [
       "CAPPOTTO",
@@ -44,9 +50,6 @@ const Outfits = () => {
       "CAPPOTTO",
       "GIUBOTTO",
       "ABITO",
-      "SANDALI",
-      "TUTA",
-      "COSTUME",
     ],
     PrimaveraAutunno: [
       "GIUBBOTTO",
@@ -102,6 +105,17 @@ const Outfits = () => {
     setSelectedOutfitId(null);
   };
 
+  const handleShowRatingModal = (outfitId) => {
+    setSelectedOutfitId(outfitId);
+    setShowRatingModal(true);
+  };
+
+  const handleCloseRatingModal = () => {
+    setShowRatingModal(false);
+    setSelectedOutfitId(null);
+    setRating(0);
+  };
+
   const markAsWorn = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -134,6 +148,44 @@ const Outfits = () => {
       handleCloseModal();
     } catch (error) {
       console.error("Errore durante l'aggiornamento dello stato:", error);
+    }
+  };
+
+  const submitRating = async () => {
+    if (rating < 1 || rating > 5) {
+      alert("Per favore, seleziona una valutazione valida tra 1 e 5.");
+      return;
+    }
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        `http://localhost:3001/abbinamenti/${selectedOutfitId}/rate`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ valutazione: rating }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Errore durante la valutazione.");
+      }
+
+      const updatedOutfit = await response.json();
+
+      setMyOutfits((prevOutfits) =>
+        prevOutfits.map((outfit) =>
+          outfit.id === selectedOutfitId ? updatedOutfit : outfit
+        )
+      );
+
+      handleCloseRatingModal();
+    } catch (error) {
+      console.error("Errore durante la valutazione:", error);
     }
   };
 
@@ -213,12 +265,23 @@ const Outfits = () => {
                       {new Date(outfit.dataIndossato).toLocaleDateString()}
                     </p>
                   )}
+                  {outfit.valutazione && (
+                    <p style={{ backgroundColor: "white", color: "#e24b3d" }}>
+                      {outfit.valutazione}
+                    </p>
+                  )}
                 </Card.Text>
                 <button
                   className="btn btn-secondary"
                   onClick={() => handleShowModal(outfit.id)}
                 >
                   INDOSSATO!
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => handleShowRatingModal(outfit.id)}
+                >
+                  VALUTA
                 </button>
               </Card.Body>
             </Card>
@@ -265,6 +328,44 @@ const Outfits = () => {
               Annulla
             </Button>
             <Button className="custom-button" onClick={markAsWorn}>
+              Conferma
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <Modal show={showRatingModal} onHide={handleCloseRatingModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Valuta Outfit</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {selectedOutfit && (
+              <>
+                <p className="text-center">
+                  VALUTA QUESTO OUTFIT DA 1 A 5 STELLE:
+                </p>
+                <Form>
+                  <Form.Group controlId="rating">
+                    <Form.Label>Valutazione</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={rating}
+                      onChange={(e) => setRating(parseInt(e.target.value))}
+                    >
+                      <option value="1">1 stella</option>
+                      <option value="2">2 stelle</option>
+                      <option value="3">3 stelle</option>
+                      <option value="4">4 stelle</option>
+                      <option value="5">5 stelle</option>
+                    </Form.Control>
+                  </Form.Group>
+                </Form>
+              </>
+            )}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseRatingModal}>
+              Annulla
+            </Button>
+            <Button className="custom-button" onClick={submitRating}>
               Conferma
             </Button>
           </Modal.Footer>
