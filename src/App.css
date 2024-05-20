@@ -98,3 +98,11 @@ main {
   width: 100%;
   margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .custom-modal {
+    max-width: 300px;
+    margin: 1.75rem auto;
+    text-align: center;
+  }
+}

@@ -10,6 +10,7 @@ const ModificaProfilo = () => {
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [userData, setUserData] = useState(null);
@@ -48,6 +49,10 @@ const ModificaProfilo = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError("Le password non corrispondono");
+      return;
+    }
 
     try {
       const token = localStorage.getItem("token");
@@ -129,6 +134,16 @@ const ModificaProfilo = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+
+        <Form.Group className="m-2" controlId="formBasicConfirmPassword">
+          <Form.Control
+            type="password"
+            placeholder="Conferma Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Form.Group>
+
         {error && <p className="text-danger">{error}</p>}
         {successMessage && <p className="text-success">{successMessage}</p>}
         <Button type="submit" className="custom-button">
