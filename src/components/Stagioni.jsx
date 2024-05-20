@@ -94,7 +94,7 @@ const Stagioni = () => {
       </Link>
       <Dropdown>
         <Dropdown.Toggle className="custom-button m-2" id="dropdown-basic">
-          {selectedSeason || "Seleziona colore"}
+          {selectedSeason || "Seleziona stagione"}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

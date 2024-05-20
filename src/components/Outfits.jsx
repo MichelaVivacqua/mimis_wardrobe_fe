@@ -83,7 +83,8 @@ const Outfits = () => {
           throw new Error("Errore durante la richiesta.");
         }
         const data = await response.json();
-        setMyOutfits(data);
+        const sortedOutfits = data.sort((a, b) => (a.dataIndossato ? 1 : -1));
+        setMyOutfits(sortedOutfits);
       } catch (error) {
         console.error("Errore durante la fetch:", error);
       }
