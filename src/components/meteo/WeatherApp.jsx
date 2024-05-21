@@ -121,7 +121,7 @@ const WeatherApp = () => {
   };
 
   return (
-    <div>
+    <div className="container-fluid">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
@@ -167,7 +167,7 @@ const WeatherApp = () => {
                 <div className="row justify-content-center">
                   <div className="cards-container">
                     {filterOutfitsBySeason(outfitType || "").map((outfit) => (
-                      <Card key={outfit.id} className="card-horizontal">
+                      <Card key={outfit.id} className="card-horizontal m-1">
                         <div className="images-container">
                           {outfit.indumenti &&
                             outfit.indumenti.map((indumento) => (

@@ -240,11 +240,21 @@ const Valigia = () => {
             {allSeasonOutfits.map((outfit) => (
               <Card
                 onClick={() => handleSelectOutfit(outfit.id)}
-                className={`custom-card ${
+                className={`card-horizontal ${
                   selectedOutfits.includes(outfit.id) ? "border-primary" : ""
                 }`}
                 key={outfit.id}
               >
+                <div className="images-container">
+                  {outfit.indumenti &&
+                    outfit.indumenti.map((indumento) => (
+                      <img
+                        key={indumento.id}
+                        src={indumento.image}
+                        alt={indumento.tipo}
+                      />
+                    ))}
+                </div>
                 <Card.Body>
                   <Card.Title className="card-title">
                     Outfit {outfit.id}
@@ -252,14 +262,9 @@ const Valigia = () => {
                   <Card.Text className="card-text">
                     {outfit.indumenti.map((indumento) => (
                       <div key={indumento.id}>
-                        <Card.Img
-                          variant="top"
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          className="card-image"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
+                        <p>
+                          {indumento.tipo} {indumento.colore}
+                        </p>
                       </div>
                     ))}
                   </Card.Text>
@@ -280,7 +285,17 @@ const Valigia = () => {
           <div>
             <div className="cards-container">
               {filteredOutfits.map((outfit) => (
-                <Card key={outfit.id} className="custom-card">
+                <Card key={outfit.id} className="card-horizontal">
+                  <div className="images-container">
+                    {outfit.indumenti &&
+                      outfit.indumenti.map((indumento) => (
+                        <img
+                          key={indumento.id}
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                        />
+                      ))}
+                  </div>
                   <Card.Body>
                     <Card.Title className="card-title">
                       Outfit {outfit.id}
@@ -288,13 +303,9 @@ const Valigia = () => {
                     <Card.Text className="card-text">
                       {outfit.indumenti.map((indumento) => (
                         <div key={indumento.id}>
-                          <Card.Img
-                            src={indumento.image}
-                            alt={indumento.tipo}
-                            className="card-image"
-                          />
-                          <p>{indumento.tipo}</p>
-                          <p>{indumento.colore}</p>
+                          <p>
+                            {indumento.tipo} {indumento.colore}
+                          </p>
                         </div>
                       ))}
                     </Card.Text>
