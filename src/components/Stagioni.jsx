@@ -130,10 +130,7 @@ const Stagioni = () => {
               seasonsMap[selectedSeason].includes(clothing.tipo)
           )
           .map((clothing) => (
-            <Card
-              key={clothing.id}
-              className="custom-card col-5 col-md-3 col-lg-2"
-            >
+            <Card key={clothing.id} className="custom-card">
               <Card.Img
                 variant="top"
                 src={clothing.image}

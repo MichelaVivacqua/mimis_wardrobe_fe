@@ -187,7 +187,7 @@ const Valigia = () => {
                 Come sarà la temperatura?
               </Form.Label>
               <Dropdown>
-                <Dropdown.Toggle className="custom-button">
+                <Dropdown.Toggle className="custom-button m-2">
                   {selectedSeason ? selectedSeason : "Seleziona stagione"}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

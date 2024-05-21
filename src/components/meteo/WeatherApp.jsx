@@ -121,7 +121,7 @@ const WeatherApp = () => {
   };
 
   return (
-    <div className="container-fluid">
+    <div className="outfit-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>

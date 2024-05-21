@@ -269,7 +269,7 @@ const Outfits = () => {
         )}
       </button>
       <div>
-        <div className="indumento-container">
+        <div className="outfit-container">
           {sortedOutfits
             .filter(
               (outfit) =>
@@ -279,7 +279,7 @@ const Outfits = () => {
                 )
             )
             .map((outfit) => (
-              <Card key={outfit.id} className="card-horizontal col-md-4">
+              <Card key={outfit.id} className="card-horizontal">
                 <div className="images-container">
                   {outfit.indumenti &&
                     outfit.indumenti.map((indumento) => (
