@@ -93,10 +93,20 @@ const EliminaAbbinamento = () => {
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
-      <div className="cards-container">
+      <div className="indumento-container">
         {myOutfits &&
           myOutfits.map((outfit) => (
-            <Card key={outfit.id} className="custom-card">
+            <Card key={outfit.id} className="card-horizontal">
+              <div className="images-container">
+                {outfit.indumenti &&
+                  outfit.indumenti.map((indumento) => (
+                    <img
+                      key={indumento.id}
+                      src={indumento.image}
+                      alt={indumento.tipo}
+                    />
+                  ))}
+              </div>
               <Card.Body>
                 <Card.Title className="card-title">
                   Outfit {outfit.id}
@@ -105,14 +115,9 @@ const EliminaAbbinamento = () => {
                   {outfit.indumenti &&
                     outfit.indumenti.map((indumento) => (
                       <div key={indumento.id}>
-                        <Card.Img
-                          variant="top"
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          className="card-image"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
+                        <p>
+                          {indumento.tipo} {indumento.colore}
+                        </p>
                       </div>
                     ))}
                 </Card.Text>
@@ -130,7 +135,11 @@ const EliminaAbbinamento = () => {
       {successMessage && (
         <div className="text-success m-2">{successMessage}</div>
       )}
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        className="custom-modal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Conferma Eliminazione Outfit</Modal.Title>
         </Modal.Header>
@@ -141,23 +150,26 @@ const EliminaAbbinamento = () => {
                 Sei sicuro di voler eliminare questo outfit? Non potrai più
                 recuperarlo.
               </p>
-              <Card key={selectedOutfit.id} className="custom-card">
+              <Card key={selectedOutfit.id} className="card-horizontal">
+                <div className="images-container">
+                  {selectedOutfit.indumenti &&
+                    selectedOutfit.indumenti.map((indumento) => (
+                      <img
+                        key={indumento.id}
+                        src={indumento.image}
+                        alt={indumento.tipo}
+                      />
+                    ))}
+                </div>
                 <Card.Body>
-                  <Card.Title className="card-title">
-                    Outfit {selectedOutfit.id}
-                  </Card.Title>
-                  <Card.Text className="card-text">
+                  <Card.Title>Outfit {selectedOutfit.id}</Card.Title>
+                  <Card.Text>
                     {selectedOutfit.indumenti &&
                       selectedOutfit.indumenti.map((indumento) => (
                         <div key={indumento.id}>
-                          <Card.Img
-                            variant="top"
-                            src={indumento.image}
-                            alt={indumento.tipo}
-                            className="card-image"
-                          />
-                          <p>{indumento.tipo}</p>
-                          <p>{indumento.colore}</p>
+                          <p>
+                            {indumento.tipo} {indumento.colore}
+                          </p>
                         </div>
                       ))}
                   </Card.Text>

@@ -121,15 +121,12 @@ const WeatherApp = () => {
   };
 
   return (
-    <div className="indumento-container">
+    <div className="login-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
       <Row>
-        <Col
-          xs={12}
-          className="d-flex flex-column justify-content-center align-items-center m-3"
-        >
+        <Col className="d-flex flex-column justify-content-center align-items-center m-3">
           <h5>Dove andrai oggi? </h5>
           <Form onSubmit={handleSubmit} className="mb-2 d-flex">
             <FormControl

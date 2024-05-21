@@ -225,7 +225,7 @@ const Outfits = () => {
   const selectedOutfit = getSelectedOutfit();
 
   return (
-    <div className="indumento-container">
+    <div>
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
@@ -268,80 +268,88 @@ const Outfits = () => {
           "Ordina per valutazione"
         )}
       </button>
-      <div className="cards-container">
-        {sortedOutfits
-          .filter(
-            (outfit) =>
-              !selectedSeason ||
-              outfit.indumenti.every((indumento) =>
-                seasonsMap[selectedSeason].includes(indumento.tipo)
-              )
-          )
-          .map((outfit) => (
-            <Card
-              key={outfit.id}
-              className="custom-card col-5 col-md-3 col-lg-2"
-            >
-              <Card.Body>
-                <Card.Title className="card-title">
-                  Outfit {outfit.id}
-                </Card.Title>
-                <Card.Text className="card-text">
+      <div>
+        <div className="indumento-container">
+          {sortedOutfits
+            .filter(
+              (outfit) =>
+                !selectedSeason ||
+                outfit.indumenti.every((indumento) =>
+                  seasonsMap[selectedSeason].includes(indumento.tipo)
+                )
+            )
+            .map((outfit) => (
+              <Card key={outfit.id} className="card-horizontal col-md-4">
+                <div className="images-container">
                   {outfit.indumenti &&
                     outfit.indumenti.map((indumento) => (
-                      <div key={indumento.id}>
-                        <Card.Img
-                          variant="top"
-                          src={indumento.image}
-                          alt={indumento.tipo}
-                          className="card-image"
-                        />
-                        <p>{indumento.tipo}</p>
-                        <p>{indumento.colore}</p>
-                      </div>
+                      <img
+                        key={indumento.id}
+                        src={indumento.image}
+                        alt={indumento.tipo}
+                      />
                     ))}
-                  {outfit.dataIndossato && (
-                    <p style={{ backgroundColor: "white", color: "#e24b3d" }}>
-                      Indossato il:{" "}
-                      {new Date(outfit.dataIndossato).toLocaleDateString()}
-                    </p>
-                  )}
-                  <div>
-                    <Rating
-                      initialRating={outfit.valutazione || 0}
-                      readonly
-                      emptySymbol={
-                        <i className="bi bi-star" style={{ color: "gold" }}></i>
-                      }
-                      fullSymbol={
-                        <i
-                          className="bi bi-star-fill"
-                          style={{ color: "gold" }}
-                        ></i>
-                      }
-                    />
-                    <i
-                      className="bi bi-pencil mx-1"
-                      onClick={() => handleShowRatingModal(outfit.id)}
-                    ></i>
-                  </div>
-                </Card.Text>
-                <button
-                  className="btn btn-secondary m-1"
-                  onClick={() => handleShowModal(outfit.id)}
-                >
-                  INDOSSATO!
-                </button>
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => shareOutfit(outfit.id)}
-                >
-                  <i className="bi bi-share-fill mx-1"></i>
-                  Chiedi un consiglio!
-                </button>
-              </Card.Body>
-            </Card>
-          ))}
+                </div>
+                <Card.Body>
+                  <Card.Title className="card-title">
+                    Outfit {outfit.id}
+                  </Card.Title>
+                  <Card.Text className="card-text">
+                    {outfit.indumenti &&
+                      outfit.indumenti.map((indumento) => (
+                        <div key={indumento.id}>
+                          <p>
+                            {indumento.tipo} {indumento.colore}
+                          </p>
+                        </div>
+                      ))}
+                    {outfit.dataIndossato && (
+                      <p style={{ backgroundColor: "white", color: "#e24b3d" }}>
+                        Indossato il:{" "}
+                        {new Date(outfit.dataIndossato).toLocaleDateString()}
+                      </p>
+                    )}
+                    <div>
+                      <Rating
+                        initialRating={outfit.valutazione || 0}
+                        readonly
+                        emptySymbol={
+                          <i
+                            className="bi bi-star"
+                            style={{ color: "gold" }}
+                          ></i>
+                        }
+                        fullSymbol={
+                          <i
+                            className="bi bi-star-fill"
+                            style={{ color: "gold" }}
+                          ></i>
+                        }
+                      />
+                      <i
+                        className="bi bi-pencil mx-1"
+                        onClick={() => handleShowRatingModal(outfit.id)}
+                      ></i>
+                    </div>
+                  </Card.Text>
+                  <button
+                    className="btn btn-secondary m-1"
+                    onClick={() => handleShowModal(outfit.id)}
+                  >
+                    INDOSSATO!
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => shareOutfit(outfit.id)}
+                  >
+                    <i className="bi bi-share-fill mx-1"></i>
+                    Chiedi un consiglio!
+                  </button>
+                </Card.Body>
+              </Card>
+            ))}
+        </div>
+
         <Modal
           show={showModal}
           onHide={handleCloseModal}
@@ -358,23 +366,26 @@ const Outfits = () => {
                   al tuo armadio così avrai a portata di mano sempre indumenti
                   diversi!
                 </p>
-                <Card key={selectedOutfit.id} className="custom-card">
+                <Card key={selectedOutfit.id} className="card-horizontal">
+                  <div className="images-container">
+                    {selectedOutfit.indumenti &&
+                      selectedOutfit.indumenti.map((indumento) => (
+                        <img
+                          key={indumento.id}
+                          src={indumento.image}
+                          alt={indumento.tipo}
+                        />
+                      ))}
+                  </div>
                   <Card.Body>
-                    <Card.Title className="card-title">
-                      Outfit {selectedOutfit.id}
-                    </Card.Title>
-                    <Card.Text className="card-text">
+                    <Card.Title>Outfit {selectedOutfit.id}</Card.Title>
+                    <Card.Text>
                       {selectedOutfit.indumenti &&
                         selectedOutfit.indumenti.map((indumento) => (
                           <div key={indumento.id}>
-                            <Card.Img
-                              variant="top"
-                              src={indumento.image}
-                              alt={indumento.tipo}
-                              className="card-image"
-                            />
-                            <p>{indumento.tipo}</p>
-                            <p>{indumento.colore}</p>
+                            <p>
+                              {indumento.tipo} {indumento.colore}
+                            </p>
                           </div>
                         ))}
                     </Card.Text>
@@ -392,7 +403,11 @@ const Outfits = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <Modal show={showRatingModal} onHide={handleCloseRatingModal}>
+        <Modal
+          show={showRatingModal}
+          onHide={handleCloseRatingModal}
+          className="custom-modal"
+        >
           <Modal.Header closeButton>
             <Modal.Title>Valuta Outfit</Modal.Title>
           </Modal.Header>
