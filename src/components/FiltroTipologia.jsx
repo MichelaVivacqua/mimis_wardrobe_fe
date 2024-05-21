@@ -37,7 +37,7 @@ const FiltroTipologia = () => {
   const types = Array.from(new Set(myClothes.map((clothing) => clothing.tipo)));
 
   return (
-    <div className="indumento-container">
+    <div className="login-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>

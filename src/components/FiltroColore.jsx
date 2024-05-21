@@ -39,7 +39,7 @@ const FiltroColore = () => {
   );
 
   return (
-    <div className="indumento-container">
+    <div className="login-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
