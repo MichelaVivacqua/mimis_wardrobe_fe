@@ -89,7 +89,7 @@ const EliminaIndumento = () => {
   const selectedClothing = getSelectedClothing();
 
   return (
-    <div>
+    <div className="outfit-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
@@ -120,7 +120,11 @@ const EliminaIndumento = () => {
       {successMessage && (
         <div className="text-success m-2">{successMessage}</div>
       )}
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        className="custom-modal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Conferma Eliminazione Indumento</Modal.Title>
         </Modal.Header>

@@ -72,7 +72,7 @@ const CreaAbbinamento = () => {
   };
 
   return (
-    <div>
+    <div className="outfit-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>

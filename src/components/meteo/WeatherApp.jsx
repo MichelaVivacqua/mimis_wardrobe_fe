@@ -121,15 +121,12 @@ const WeatherApp = () => {
   };
 
   return (
-    <div className="indumento-container">
+    <div className="outfit-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
       <Row>
-        <Col
-          xs={12}
-          className="d-flex flex-column justify-content-center align-items-center m-3"
-        >
+        <Col className="d-flex flex-column justify-content-center align-items-center m-3">
           <h5>Dove andrai oggi? </h5>
           <Form onSubmit={handleSubmit} className="mb-2 d-flex">
             <FormControl
@@ -170,7 +167,17 @@ const WeatherApp = () => {
                 <div className="row justify-content-center">
                   <div className="cards-container">
                     {filterOutfitsBySeason(outfitType || "").map((outfit) => (
-                      <Card key={outfit.id} className="custom-card">
+                      <Card key={outfit.id} className="card-horizontal m-1">
+                        <div className="images-container">
+                          {outfit.indumenti &&
+                            outfit.indumenti.map((indumento) => (
+                              <img
+                                key={indumento.id}
+                                src={indumento.image}
+                                alt={indumento.tipo}
+                              />
+                            ))}
+                        </div>
                         <Card.Body>
                           <Card.Title className="card-title">
                             Outfit {outfit.id}
@@ -179,14 +186,9 @@ const WeatherApp = () => {
                             {outfit.indumenti &&
                               outfit.indumenti.map((indumento) => (
                                 <div key={indumento.id}>
-                                  <Card.Img
-                                    variant="top"
-                                    src={indumento.image}
-                                    alt={indumento.tipo}
-                                    className="card-image"
-                                  />
-                                  <p>{indumento.tipo}</p>
-                                  <p>{indumento.colore}</p>
+                                  <p>
+                                    {indumento.tipo} {indumento.colore}
+                                  </p>
                                 </div>
                               ))}
                             {outfit.dataIndossato && (

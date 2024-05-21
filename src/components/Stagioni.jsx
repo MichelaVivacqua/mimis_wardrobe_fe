@@ -88,7 +88,7 @@ const Stagioni = () => {
   };
 
   return (
-    <div>
+    <div className="indumento-container">
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>

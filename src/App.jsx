@@ -67,7 +67,9 @@ function App() {
             <Route element={<Valigia />} path="/MyNavbar/Valigia" />
             <Route
               element={
-                <h1 className="text-center">ERRORE 404 - PAGINA NON TROVATA</h1>
+                <h1 className="indumento-container">
+                  ERRORE 404 - PAGINA NON TROVATA
+                </h1>
               }
               path="*"
             />
