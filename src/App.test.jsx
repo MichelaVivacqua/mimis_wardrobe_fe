@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import { BrowserRouter } from "react-router-dom";
 import CreaIndumento from "./components/CreaIndumento";
 import FiltroTipologia from "./components/FiltroTipologia";
+import Outfits from "./components/Outfits";
 
 test("Verifico che i campi email,password e login siano presenti", () => {
   render(
@@ -40,7 +41,7 @@ test("Verifico che i campi immagine indumento, tipo e colore e il tasto di submi
   expect(submit).toBeInTheDocument();
 });
 
-test("Verifica che il componente Armadio filtro tipologia venga renderizzato correttamente", () => {
+test("Verifica che il componente filtro tipologia venga renderizzato correttamente", () => {
   render(
     <BrowserRouter>
       <FiltroTipologia />
@@ -51,5 +52,19 @@ test("Verifica che il componente Armadio filtro tipologia venga renderizzato cor
   expect(logo).toBeInTheDocument();
 
   const dropdown = screen.getByText(/Seleziona tipo/i);
+  expect(dropdown).toBeInTheDocument();
+});
+
+test("Verifica che il componente oufit venga renderizzato correttamente", () => {
+  render(
+    <BrowserRouter>
+      <Outfits />
+    </BrowserRouter>
+  );
+
+  const logo = screen.getByAltText("logo");
+  expect(logo).toBeInTheDocument();
+
+  const dropdown = screen.getByText(/Tutte le stagioni/i);
   expect(dropdown).toBeInTheDocument();
 });
