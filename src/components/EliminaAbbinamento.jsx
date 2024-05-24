@@ -93,7 +93,7 @@ const EliminaAbbinamento = () => {
       <Link to="/MyNavbar">
         <img src={logo} alt="logo" className="logo" />
       </Link>
-      <div className="outfits-container">
+      <div className="outfits-container" style={{ minHeight: "55vh" }}>
         {myOutfits &&
           myOutfits.map((outfit) => (
             <Card key={outfit.id} className="card-horizontal">

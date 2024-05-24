@@ -236,7 +236,7 @@ const Valigia = () => {
         </div>
       ) : showAllSeasonOutfits ? (
         <div>
-          <div className="cards-container">
+          <div className="outfits-container" style={{ minHeight: "45vh" }}>
             {allSeasonOutfits.map((outfit) => (
               <Card
                 onClick={() => handleSelectOutfit(outfit.id)}
@@ -283,7 +283,7 @@ const Valigia = () => {
       ) : (
         selectedSeason && (
           <div>
-            <div className="outfits-container">
+            <div className="outfits-container" style={{ minHeight: "0vh" }}>
               {filteredOutfits.map((outfit) => (
                 <Card key={outfit.id} className="card-horizontal">
                   <div className="images-container">
