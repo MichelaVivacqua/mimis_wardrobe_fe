@@ -164,52 +164,52 @@ const WeatherApp = () => {
               )}
 
               {outfits.length > 0 && (
-                <div className="row justify-content-center">
-                  <div className="cards-container">
-                    {filterOutfitsBySeason(outfitType || "").map((outfit) => (
-                      <Card key={outfit.id} className="card-horizontal m-1">
-                        <div className="images-container">
+                // <div className="row justify-content-center">
+                <div className="outfit-container">
+                  {filterOutfitsBySeason(outfitType || "").map((outfit) => (
+                    <Card key={outfit.id} className="card-horizontal m-1">
+                      <div className="images-container">
+                        {outfit.indumenti &&
+                          outfit.indumenti.map((indumento) => (
+                            <img
+                              key={indumento.id}
+                              src={indumento.image}
+                              alt={indumento.tipo}
+                            />
+                          ))}
+                      </div>
+                      <Card.Body>
+                        <Card.Title className="card-title">
+                          Outfit {outfit.id}
+                        </Card.Title>
+                        <Card.Text className="card-text">
                           {outfit.indumenti &&
                             outfit.indumenti.map((indumento) => (
-                              <img
-                                key={indumento.id}
-                                src={indumento.image}
-                                alt={indumento.tipo}
-                              />
+                              <div key={indumento.id}>
+                                <p>
+                                  {indumento.tipo} {indumento.colore}
+                                </p>
+                              </div>
                             ))}
-                        </div>
-                        <Card.Body>
-                          <Card.Title className="card-title">
-                            Outfit {outfit.id}
-                          </Card.Title>
-                          <Card.Text className="card-text">
-                            {outfit.indumenti &&
-                              outfit.indumenti.map((indumento) => (
-                                <div key={indumento.id}>
-                                  <p>
-                                    {indumento.tipo} {indumento.colore}
-                                  </p>
-                                </div>
-                              ))}
-                            {outfit.dataIndossato && (
-                              <p
-                                style={{
-                                  backgroundColor: "white",
-                                  color: "#e24b3d",
-                                }}
-                              >
-                                Indossato il:{" "}
-                                {new Date(
-                                  outfit.dataIndossato
-                                ).toLocaleDateString()}
-                              </p>
-                            )}
-                          </Card.Text>
-                        </Card.Body>
-                      </Card>
-                    ))}
-                  </div>
+                          {outfit.dataIndossato && (
+                            <p
+                              style={{
+                                backgroundColor: "white",
+                                color: "#e24b3d",
+                              }}
+                            >
+                              Indossato il:{" "}
+                              {new Date(
+                                outfit.dataIndossato
+                              ).toLocaleDateString()}
+                            </p>
+                          )}
+                        </Card.Text>
+                      </Card.Body>
+                    </Card>
+                  ))}
                 </div>
+                // </div>
               )}
             </div>
           )}
