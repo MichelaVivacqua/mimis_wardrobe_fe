@@ -236,7 +236,7 @@ const Valigia = () => {
         </div>
       ) : showAllSeasonOutfits ? (
         <div>
-          <div className="cards-container">
+          <div className="outfits-container" style={{ minHeight: "45vh" }}>
             {allSeasonOutfits.map((outfit) => (
               <Card
                 onClick={() => handleSelectOutfit(outfit.id)}
@@ -273,7 +273,7 @@ const Valigia = () => {
             ))}
           </div>
           {selectedOutfits.length > 0 && (
-            <div className="text-center mt-3">
+            <div className="text-center m-3">
               <Button onClick={handleConfirm} variant="success">
                 Conferma
               </Button>
@@ -283,7 +283,7 @@ const Valigia = () => {
       ) : (
         selectedSeason && (
           <div>
-            <div className="cards-container">
+            <div className="outfits-container" style={{ minHeight: "0vh" }}>
               {filteredOutfits.map((outfit) => (
                 <Card key={outfit.id} className="card-horizontal">
                   <div className="images-container">
@@ -318,13 +318,13 @@ const Valigia = () => {
                 <Button
                   onClick={handleConfirm}
                   variant="success"
-                  className="m-1"
+                  className="m-1 mb-3"
                 >
                   Conferma
                 </Button>
                 <Button
                   onClick={handleChangeOutfit}
-                  className="custom-button m-1"
+                  className="custom-button m-1 mb-3"
                 >
                   Cambia Outfit
                 </Button>

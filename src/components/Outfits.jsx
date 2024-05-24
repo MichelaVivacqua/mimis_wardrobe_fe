@@ -269,7 +269,7 @@ const Outfits = () => {
         )}
       </button>
       <div>
-        <div className="outfit-container">
+        <div className="outfits-container" style={{ minHeight: "55vh" }}>
           {sortedOutfits
             .filter(
               (outfit) =>

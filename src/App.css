@@ -124,14 +124,38 @@ main {
   display: flex;
   flex-direction: row !important;
   align-items: center;
-  margin-bottom: 20px; /* Adds space between cards */
-  width: 80%; /* Ensure cards take full width */
-  border: 1px solid #ddd; /* Optional: Add a border to cards */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow to cards */
-  padding: 10px; /* Optional: Add padding to cards */
-  border-radius: 10px; /* Optional: Round the corners */
+  margin-bottom: 20px;
+  width: 80%;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 10px;
   background-color: #fff9c4 !important;
-  max-width: 400px; /* Optional: Background color for cards */
+  max-width: 400px;
+}
+
+.outfits-container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #ffdab9;
+}
+
+@media (min-width: 768px) {
+  .outfits-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card-horizontal {
+    width: calc(33% - 20px);
+    margin: 10px;
+  }
 }
 
 .card-horizontal .images-container {
@@ -142,26 +166,26 @@ main {
 }
 
 .card-horizontal .images-container img {
-  width: 100px; /* Set the desired width */
-  height: auto; /* Maintain aspect ratio */
-  margin-top: -20px; /* Adjust this value to control the overlap */
+  width: 100px;
+  height: auto;
+  margin-top: -20px;
   border: 2px solid white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 5px; /* Optional: Round the corners of images */
+  border-radius: 5px;
 }
 
 .card-horizontal .images-container img:first-child {
-  margin-top: 0; /* Ensure the first image is not overlapped */
+  margin-top: 0;
 }
 
 .card-horizontal .images-container img:nth-child(odd) {
-  transform: rotate(-10deg); /* Rotate odd images to the left */
-  margin-top: -20px; /* Adjust this value to control the overlap */
+  transform: rotate(-10deg);
+  margin-top: -20px;
 }
 
 .card-horizontal .images-container img:nth-child(even) {
-  transform: rotate(10deg); /* Rotate even images to the right */
-  margin-top: -20px; /* Adjust this value to control the overlap */
+  transform: rotate(10deg);
+  margin-top: -20px;
 }
 
 .card-horizontal .card-body {
