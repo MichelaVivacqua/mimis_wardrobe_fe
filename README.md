@@ -34,4 +34,4 @@ https://mimis-wardrobe-fe.vercel.app/
 
 ## Contatti
 
-Per domande, segnalazioni di bug o suggerimenti, contattami all'indirizzo email [vivacquamichela@gmail.com] !
+Per domande, segnalazioni di bug o suggerimenti, contattami all'indirizzo email [vivacquamichela@gmail.com] !!
