@@ -30,7 +30,7 @@ https://github.com/MichelaVivacqua/Mimi-sWardrobe
 
 ## Link alla versione deployata:
 
-da aggiungere
+https://mimis-wardrobe-fe.vercel.app/
 
 ## Contatti
 
