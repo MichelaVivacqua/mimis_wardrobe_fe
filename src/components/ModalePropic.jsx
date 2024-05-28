@@ -24,13 +24,16 @@ const ModalePropic = ({ show, handleClose }) => {
     formData.append("propic", image);
 
     try {
-      const response = await fetch("http://localhost:3001/utenti/upload", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/upload",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         handleClose();

@@ -26,11 +26,14 @@ const EliminaIndumento = () => {
     const fetchMyClothes = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:3001/indumenti/miei", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/miei",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Errore durante la richiesta.");
         }
@@ -58,7 +61,7 @@ const EliminaIndumento = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:3001/indumenti/${selectedClothingId}`,
+        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/${selectedClothingId}`,
         {
           method: "DELETE",
           headers: {

@@ -28,11 +28,14 @@ const ModificaProfilo = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/utenti/me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await fetch(
+          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/me",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         if (response.ok) {
           const userData = await response.json();
           setUserData(userData);
@@ -57,20 +60,23 @@ const ModificaProfilo = () => {
     try {
       const token = localStorage.getItem("token");
       const utenteId = userData.id;
-      const response = await fetch(`http://localhost:3001/utenti/${utenteId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          name,
-          surname,
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/${utenteId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            name,
+            surname,
+            email,
+            password,
+          }),
+        }
+      );
 
       if (response.ok) {
         setSuccessMessage("DATI MODIFICATI CON SUCCESSO!");

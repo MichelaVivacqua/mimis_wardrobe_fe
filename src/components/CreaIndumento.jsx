@@ -50,19 +50,22 @@ const CreaIndumento = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/indumenti", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          image: imageUrl,
-          colore: colore.toUpperCase(),
-          tipo: tipo.toUpperCase(),
-          id: indumentoId,
-        }),
-      });
+      const response = await fetch(
+        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            image: imageUrl,
+            colore: colore.toUpperCase(),
+            tipo: tipo.toUpperCase(),
+            id: indumentoId,
+          }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -85,7 +88,7 @@ const CreaIndumento = () => {
     try {
       console.log(indumentoId);
       const response = await fetch(
-        `http://localhost:3001/indumenti/upload/${indumentoId}`,
+        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/upload/${indumentoId}`,
         {
           method: "POST",
           headers: {

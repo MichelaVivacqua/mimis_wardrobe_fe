@@ -33,19 +33,22 @@ const Registrazione = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username,
-          name,
-          surname,
-          email,
-          password,
-        }),
-      });
+      const response = await fetch(
+        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            name,
+            surname,
+            email,
+            password,
+          }),
+        }
+      );
 
       if (response.ok) {
         setSuccessMessage(

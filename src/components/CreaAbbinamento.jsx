@@ -22,11 +22,14 @@ const CreaAbbinamento = () => {
     const fetchMyClothes = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:3001/indumenti/miei", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/miei",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Errore durante la richiesta.");
         }
@@ -52,14 +55,17 @@ const CreaAbbinamento = () => {
   const createAbbinamento = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:3001/abbinamenti", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ indumenti: selectedClothes.map((c) => c.id) }),
-      });
+      const response = await fetch(
+        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/abbinamenti",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ indumenti: selectedClothes.map((c) => c.id) }),
+        }
+      );
       if (!response.ok) {
         throw new Error("Errore durante la creazione dell'abbinamento.");
       }

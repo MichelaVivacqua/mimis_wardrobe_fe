@@ -23,11 +23,14 @@ const EliminaProfilo = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch("http://localhost:3001/utenti/me", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await fetch(
+          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/me",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         if (response.ok) {
           const userData = await response.json();
           setUserData(userData);
@@ -54,12 +57,15 @@ const EliminaProfilo = () => {
     try {
       const token = localStorage.getItem("token");
       const utenteId = userData.id;
-      const response = await fetch(`http://localhost:3001/utenti/${utenteId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/${utenteId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         setSuccessMessage("UTENTE ELIMINATO CON SUCCESSO!");

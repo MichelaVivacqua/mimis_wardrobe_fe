@@ -68,11 +68,14 @@ const Valigia = () => {
     const fetchMyOutfits = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await fetch("http://localhost:3001/abbinamenti/miei", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/abbinamenti/miei",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Errore durante la richiesta.");
         }
