@@ -13,7 +13,7 @@ const Stagioni = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/miei",
+          "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/miei",
           {
             headers: {
               Authorization: `Bearer ${token}`,

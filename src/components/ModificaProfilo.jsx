@@ -29,7 +29,7 @@ const ModificaProfilo = () => {
     const fetchUserData = async () => {
       try {
         const response = await fetch(
-          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/me",
+          "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/me",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -61,7 +61,7 @@ const ModificaProfilo = () => {
       const token = localStorage.getItem("token");
       const utenteId = userData.id;
       const response = await fetch(
-        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/${utenteId}`,
+        `https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/${utenteId}`,
         {
           method: "PUT",
           headers: {

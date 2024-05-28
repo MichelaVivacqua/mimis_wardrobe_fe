@@ -51,7 +51,7 @@ const CreaIndumento = () => {
 
     try {
       const response = await fetch(
-        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti",
+        "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti",
         {
           method: "POST",
           headers: {
@@ -88,7 +88,7 @@ const CreaIndumento = () => {
     try {
       console.log(indumentoId);
       const response = await fetch(
-        `http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/upload/${indumentoId}`,
+        `https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/indumenti/upload/${indumentoId}`,
         {
           method: "POST",
           headers: {

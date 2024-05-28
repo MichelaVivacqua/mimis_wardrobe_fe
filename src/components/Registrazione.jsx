@@ -34,7 +34,7 @@ const Registrazione = () => {
 
     try {
       const response = await fetch(
-        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/auth/register",
+        "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/auth/register",
         {
           method: "POST",
           headers: {

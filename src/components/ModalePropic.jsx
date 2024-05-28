@@ -25,7 +25,7 @@ const ModalePropic = ({ show, handleClose }) => {
 
     try {
       const response = await fetch(
-        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/upload",
+        "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/utenti/upload",
         {
           method: "POST",
           headers: {

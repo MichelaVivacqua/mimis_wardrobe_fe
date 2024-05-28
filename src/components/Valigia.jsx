@@ -69,7 +69,7 @@ const Valigia = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/abbinamenti/miei",
+          "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/abbinamenti/miei",
           {
             headers: {
               Authorization: `Bearer ${token}`,
