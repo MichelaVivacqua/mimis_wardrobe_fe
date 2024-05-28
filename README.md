@@ -20,8 +20,12 @@ Mantieni anche tu il tuo armadio a portata di app 📱
 
 1. Clona il repository da GitHub.
 2. Esegui `npm install` per installare le dipendenze.
-3. Configura il file `config.js` con la variabile d'ambiente config (contenente l'API KEY per il meteo)
-4. Esegui `npm run dev` per avviare l'applicazione
+3. Configura il file `config.js` con la variabile d'ambiente config (contenente l'API KEY per il meteo) e decommenta il collegamento nel componente FetchWeatherData
+4. Se non stai usando il backend nella sua versione deployata:
+   (https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/),
+   ma facendolo girare in locale dalla repo linkata sotto ⬇️,
+   sostituisci il dominio delle fetch con localhost e la porta su quale stai facendo girare il backend, oppure ritorna al commit d1f12693e34aa130c78f58c2c25b198bd8fad631
+5. Esegui `npm run dev` per avviare l'applicazione
 
 ## Link al repository back-end
 
