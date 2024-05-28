@@ -34,7 +34,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/auth/login",
+        "https://amused-jeniece-mimiswardrobe-dcb5d9c7.koyeb.app/auth/login",
         {
           method: "POST",
           headers: {
